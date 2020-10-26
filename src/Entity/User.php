@@ -52,12 +52,12 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      */
-    private $user_selected;
+    private $selectedUser;
 
     /**
      * @ORM\OneToOne(targetEntity=GiftsList::class, cascade={"persist", "remove"})
      */
-    private $GiftsList;
+    private $giftsList;
 
     public function getId(): ?int
     {
@@ -165,26 +165,26 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getUserSelected(): ?self
+    public function getSelectedUser(): ?self
     {
-        return $this->user_selected;
+        return $this->selectedUser;
     }
 
-    public function setUserSelected(?self $user_selected): self
+    public function setSelectedUser(?self $selectedUser): self
     {
-        $this->user_selected = $user_selected;
+        $this->selectedUser = $selectedUser;
 
         return $this;
     }
 
     public function getGiftsList(): ?GiftsList
     {
-        return $this->GiftsList;
+        return $this->giftsList;
     }
 
-    public function setGiftsList(?GiftsList $GiftsList): self
+    public function setGiftsList(?GiftsList $giftsList): self
     {
-        $this->GiftsList = $GiftsList;
+        $this->giftsList = $giftsList;
 
         return $this;
     }

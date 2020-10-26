@@ -19,6 +19,14 @@ class GiftsListRepository extends ServiceEntityRepository
         parent::__construct($registry, GiftsList::class);
     }
 
+    public function findPublishedList()
+    {
+        return $this->createQueryBuilder('g')
+            ->where('g.isPublished = 1')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return GiftsList[] Returns an array of GiftsList objects
     //  */
