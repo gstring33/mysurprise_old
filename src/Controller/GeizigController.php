@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class GeizigController extends AbstractController
 {
     /**
-     * @Route("/", name="geizig.home")
+     * @Route("/", name="app_home")
      */
     public function index(): Response
     {
