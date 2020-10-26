@@ -6,6 +6,7 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {% include "common/nav.html.twig" with {'isAllowedToSelectUser': isAllowedToSelectUser}%}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
