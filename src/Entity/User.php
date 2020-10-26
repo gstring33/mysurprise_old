@@ -50,7 +50,7 @@ class User implements UserInterface
     private $isSelected;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class)
      */
     private $selectedUser;
 
@@ -58,6 +58,11 @@ class User implements UserInterface
      * @ORM\OneToOne(targetEntity=GiftsList::class, cascade={"persist", "remove"})
      */
     private $giftsList;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": 0})
+     */
+    private $isAllowedToSelectUser;
 
     public function getId(): ?int
     {
@@ -185,6 +190,18 @@ class User implements UserInterface
     public function setGiftsList(?GiftsList $giftsList): self
     {
         $this->giftsList = $giftsList;
+
+        return $this;
+    }
+
+    public function getIsAllowedToSelectUser(): ?bool
+    {
+        return $this->isAllowedToSelectUser;
+    }
+
+    public function setIsAllowedToSelectUser(bool $isAllowedToSelectUser): self
+    {
+        $this->isAllowedToSelectUser = $isAllowedToSelectUser;
 
         return $this;
     }

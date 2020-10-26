@@ -21,19 +21,13 @@ class GeizigController extends AbstractController
         UserRepository $userRepository
     ): Response
     {
-        $isAllowedToSelectedUser = false;
         $user = $this->getUser();
         $totalUsers = count($userRepository->findAll());
         $totalPublishedList = count($giftsListRepository->findPublishedList());
 
-        if($totalPublishedList === $totalUsers) {
-            $isAllowedToSelectedUser = true;
-        }
-
         return $this->render('geizig/index.html.twig', [
             'user' => $user,
             'page' => 'Homepage',
-            'isAllowedToSelectUser' => $isAllowedToSelectedUser,
             'totalLists' => $totalUsers,
             'publishedLists' => $totalPublishedList
         ]);
@@ -50,7 +44,6 @@ class GeizigController extends AbstractController
         return $this->render('geizig/manage_list.html.twig', [
             'user' => $user,
             'page' => 'Liste ertsellen',
-            'isAllowedToSelectUser' => false,
         ]);
     }
 }

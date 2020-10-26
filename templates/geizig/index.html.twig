@@ -6,7 +6,7 @@
     <div>
         <h1>Hello {{ user.firstname }} {{ user.lastname }} - {{ user.id }}</h1>
         <div>
-            {% if isAllowedToSelectUser %}
+            {% if user.isAllowedToSelectUser %}
                 {% if user.selectedUser is null %}
                     Sie können nun die Person auswählen, die Ihr Geschenk erhalten soll
                 {% else %}
