@@ -21,12 +21,10 @@ class GeizigController extends AbstractController
         UserRepository $userRepository
     ): Response
     {
-        $user = $this->getUser();
         $totalUsers = count($userRepository->findAll());
         $totalPublishedList = count($giftsListRepository->findPublishedList());
 
         return $this->render('geizig/index.html.twig', [
-            'user' => $user,
             'page' => 'Homepage',
             'totalLists' => $totalUsers,
             'publishedLists' => $totalPublishedList
@@ -34,16 +32,13 @@ class GeizigController extends AbstractController
     }
 
     /**
-     * @Route("liste-erstellen", name="app_manage_list")
+     * @Route("liste-handeln", name="app_manage_list")
      * @return Response
      */
-    public function createList()
+    public function manageList()
     {
-        $user = $this->getUser();
-
         return $this->render('geizig/manage_list.html.twig', [
-            'user' => $user,
-            'page' => 'Liste ertsellen',
+            'page' => 'Liste handeln',
         ]);
     }
 
@@ -53,11 +48,19 @@ class GeizigController extends AbstractController
      */
     public function selectSomeone()
     {
-        $user = $this->getUser();
-
         return $this->render('geizig/select_someone.html.twig', [
-            'user' => $user,
             'page' => 'Jemanden auswählen',
+        ]);
+    }
+
+    /**
+     * @Route("liste-erstellen", name="app_create_liste")
+     * @return Response
+     */
+    public function createList()
+    {
+        return $this->render('geizig/create_list.html.twig', [
+            'page' => 'Liste erstellen',
         ]);
     }
 }

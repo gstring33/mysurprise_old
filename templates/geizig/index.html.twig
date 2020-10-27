@@ -4,9 +4,9 @@
 
 {% block body %}
     <div>
-        <h1>Hello {{ user.firstname }} {{ user.lastname }} - {{ user.id }}</h1>
+        <h1>Hello {{ app.user.firstname }} {{ app.user.lastname }} - {{ app.user.id }}</h1>
         <div>
-            {% if user.isAllowedToSelectUser %}
+            {% if app.user.isAllowedToSelectUser %}
                 {% if user.selectedUser is null %}
                     Sie können nun die Person auswählen, die Ihr Geschenk erhalten soll
                 {% else %}
@@ -14,7 +14,7 @@
                 {% endif %}
             {% else %}
                 <p>Published List : {{ publishedLists }} / {{ totalLists }}</p>
-                {% if user.giftsList is null %}
+                {% if app.user.giftsList is null %}
                     <p>Ihre Liste wurde noch nicht veröffentlicht. Klicken Sie hier, um es zu veröffentlichen</p>
                 {% else %}
                     Du hast deine List erfolreich publiziert aber andere Benutzer haben ihre Liste noch nicht veröffentlicht
@@ -22,5 +22,4 @@
             {% endif %}
         </div>
     </div>
-    <a href="{{ url('app_logout') }}">Logout</a>
 {% endblock %}
