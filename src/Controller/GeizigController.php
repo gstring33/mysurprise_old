@@ -34,7 +34,7 @@ class GeizigController extends AbstractController
     }
 
     /**
-     * @Route("create-list", name="app_manage_list")
+     * @Route("liste-erstellen", name="app_manage_list")
      * @return Response
      */
     public function createList()
@@ -44,6 +44,20 @@ class GeizigController extends AbstractController
         return $this->render('geizig/manage_list.html.twig', [
             'user' => $user,
             'page' => 'Liste ertsellen',
+        ]);
+    }
+
+    /**
+     * @Route("jemanden-auswählen", name="app_select_someone")
+     * @return Response
+     */
+    public function selectSomeone()
+    {
+        $user = $this->getUser();
+
+        return $this->render('geizig/select_someone.html.twig', [
+            'user' => $user,
+            'page' => 'Jemanden auswählen',
         ]);
     }
 }

@@ -2,6 +2,7 @@
     <li><a href="{{ url('app_home') }}">Home</a></li>
     <li><a href="{{ url('app_manage_list') }}">Create your list</a></li>
    {# {% if isAllowedToSelectUser %}#}
-        <li><a href="">Select a personn</a></li>
+        <li><a href="{{ url('app_select_someone') }}">Select a personn</a></li>
     {#{% endif %}#}
+    <li><a href="{{ url('app_logout') }}">Logout</a></li>
 </ul>
