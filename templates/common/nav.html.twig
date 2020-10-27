@@ -1,8 +1,10 @@
 <ul>
     <li><a href="{{ url('app_home') }}">Home</a></li>
-    <li><a href="{{ url('app_manage_list') }}">Manage your list</a></li>
-   {# {% if app.user.isAllowedToSelectUser %}#}
+    {% if isAllowedToManageList %}
+        <li><a href="{{ url('app_manage_list') }}">Manage your list</a></li>
+    {% endif %}
+    {% if app.user.isAllowedToSelectUser %}#}
         <li><a href="{{ url('app_select_someone') }}">Select a personn</a></li>
-    {#{% endif %}#}
+    {% endif %}
     <li><a href="{{ url('app_logout') }}">Logout</a></li>
 </ul>
