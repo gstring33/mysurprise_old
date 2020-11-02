@@ -1,8 +1,6 @@
 <ul>
     <li><a href="{{ url('app_home') }}">Home</a></li>
-    {% if isAllowedToManageList %}
-        <li><a href="{{ url('app_manage_list') }}">Manage your list</a></li>
-    {% endif %}
+    <li><a href="{{ url('app_manage_liste') }}">Manage your list</a></li>
     {% if app.user.isAllowedToSelectUser %}#}
         <li><a href="{{ url('app_select_someone') }}">Select a personn</a></li>
     {% endif %}
