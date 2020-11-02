@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\GiftRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=GiftRepository::class)
@@ -18,7 +19,8 @@ class Gift
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
      */
     private $title;
 
@@ -29,6 +31,9 @@ class Gift
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(
+     *    message = "Das Link '{{value}}' ist ungültig",
+     * )
      */
     private $link;
 
