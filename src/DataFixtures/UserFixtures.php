@@ -4,11 +4,12 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     /** @var Faker\Generator */
     private $faker;
@@ -28,12 +29,16 @@ class UserFixtures extends Fixture
             $user = new User();
             $firstname = $this->faker->firstName;
             $lastname = $this->faker->lastName;
+
             $user->setFirstname($firstname)
                 ->setLastname($lastname)
                 ->setRoles([])
                 ->setIsSelected(false)
-                ->setPassword($this->encoder->encodePassword($user, 'geizig12345'))
-                ->setUsername(lcfirst($firstname) . "." . lcfirst($lastname));
+                ->setPassword($this->encoder->encodePassword($user, '12345'))
+                ->setUsername(lcfirst($firstname) . "." . lcfirst($lastname))
+                ->setGiftsList( ($this->getReference(GiftListFixtures::REF_GIFT_LIST . $i)))
+                ->setIsAllowedToSelectUser(0);
+
             $manager->persist($user);
         }
 
@@ -42,10 +47,19 @@ class UserFixtures extends Fixture
             ->setLastname('Dhenu')
             ->setRoles(['ROLE_SUPER_ADMIN'])
             ->setIsSelected(false)
-            ->setPassword($this->encoder->encodePassword($super_admin, 'geizig12345'))
-            ->setUsername('martin.dhenu');
+            ->setPassword($this->encoder->encodePassword($super_admin, '12345'))
+            ->setUsername('martin.dhenu')
+            ->setGiftsList( ($this->getReference(GiftListFixtures::REF_GIFT_LIST . "3")))
+            ->setIsAllowedToSelectUser(0);
         $manager->persist($super_admin);
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            GiftListFixtures::class,
+        ];
     }
 }
