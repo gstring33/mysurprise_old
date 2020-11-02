@@ -3,11 +3,9 @@ import React, {Component} from 'react';
 class ListItem extends Component {
 
     render() {
-        console.log(this.props.listItems)
         return <table>
             <thead>
                 <tr>
-                    <th></th>
                     <th>title</th>
                     <th>Description</th>
                     <th>link</th>
@@ -15,8 +13,7 @@ class ListItem extends Component {
             </thead>
             <tbody>
             {this.props.listItems.map((item) =>(
-                <tr key={item.id}>
-                    <td>{item.id}</td>
+                <tr key={'item-' + item.title + '-' + item.id}>
                     <td>{item.title}</td>
                     <td>{item.description}</td>
                     <td>{item.link}</td>

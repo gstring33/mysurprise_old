@@ -29,7 +29,7 @@ class ListCreator extends Component {
     render() {
         return (
             <div>
-                <FormAddItem hanldeAddListItem={this.handleAddListItem}></FormAddItem><br/>
+                <FormAddItem hanldeAddListItem={this.handleAddListItem} itemId={this.state.items.length}></FormAddItem><br/>
                 {this.state.displayItems ?
                     <ListItem listItems={this.state.items}></ListItem> : ""
                 }
