@@ -11,7 +11,8 @@ class ListCreator extends Component {
 
         this.state = {
             items: [],
-            displayItems: false
+            displayItems: false,
+            alertMessage: false
         }
 
         this.handleAddListItem = this.handleAddListItem.bind(this);
@@ -62,7 +63,10 @@ class ListCreator extends Component {
     handleSendList()
     {
         this.postData(this.host + "/api/gift-list", this.state.items)
-            .then(response => console.log(response.json()));
+            .then(response => response.json())
+            .then(data => {
+                this.setState({alertMessage: data.message})
+            });
     }
 
     render() {
@@ -72,8 +76,11 @@ class ListCreator extends Component {
                 {this.state.displayItems ?
                     <ListItem listItems={this.state.items} handleRemoveItem={this.handleRemoveItem}></ListItem> : ""
                 }
-                {this .state.displayItems ?
+                {this.state.displayItems ?
                     <button onClick={this.handleSendList}>Send List</button>: ""
+                }
+                {this.state.alertMessage ?
+                    <p>{this.state.alertMessage}</p> : ""
                 }
             </div>
         )
