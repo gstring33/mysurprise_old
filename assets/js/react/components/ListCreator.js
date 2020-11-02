@@ -13,6 +13,7 @@ class ListCreator extends Component {
         }
 
         this.handleAddListItem = this.handleAddListItem.bind(this);
+        this.handleRemoveItem = this.handleRemoveItem.bind(this)
     }
 
     handleAddListItem(newItem) {
@@ -26,12 +27,27 @@ class ListCreator extends Component {
         });
     }
 
+    handleRemoveItem(itemId) {
+        const id = parseInt(itemId)
+        const items = this.state.items;
+        items.splice(
+            items.findIndex(item => item.id === id),
+            1
+        )
+
+        this.setState({items: items})
+
+        if(this.state.items.length === 0) {
+            this.setState({displayItems: false})
+        }
+    }
+
     render() {
         return (
             <div>
-                <FormAddItem hanldeAddListItem={this.handleAddListItem} itemId={this.state.items.length}></FormAddItem><br/>
+                <FormAddItem hanldeAddListItem={this.handleAddListItem}></FormAddItem><br/>
                 {this.state.displayItems ?
-                    <ListItem listItems={this.state.items}></ListItem> : ""
+                    <ListItem listItems={this.state.items} handleRemoveItem={this.handleRemoveItem}></ListItem> : ""
                 }
             </div>
         )

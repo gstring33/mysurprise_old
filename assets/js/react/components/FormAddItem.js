@@ -19,12 +19,12 @@ class FormAddItem extends Component {
         event.preventDefault();
 
         let item = {
-            id: this.props.itemId,
+            id: Math.floor(Math.random() * 1000000) + 1,
             title: this.state.title,
             description: this.state.description,
             link: this.state.link
         }
-
+        this.resetForm();
         this.props.hanldeAddListItem(item);
     }
 
@@ -36,14 +36,23 @@ class FormAddItem extends Component {
         this.setState({[name]: value})
     }
 
+    resetForm() {
+        this.setState({
+            id: '',
+            title: '',
+            description: '',
+            link: ''
+        });
+    }
+
     render() {
         return <form onSubmit={this.handleSubmit}>
-            <label htmlFor="title">Title</label>
-            <input type="text" name="title" className="title" value={this.state.value} onChange={this.handleChange} />
-            <label htmlFor="description">Description</label>
-            <textarea name="description" className="description" value={this.state.value} onChange={this.handleChange} rows="4" cols="50"></textarea>
-            <label htmlFor="link">Link</label>
-            <input type="text" name="link" className="link" value={this.state.value} onChange={this.handleChange} />
+            <label htmlFor="title">Title</label><br/>
+            <input type="text" name="title" className="title" value={this.state.title} onChange={this.handleChange} /><br/>
+            <label htmlFor="description">Description</label><br/>
+            <textarea name="description" className="description" value={this.state.description} onChange={this.handleChange} rows="4" cols="50"></textarea><br/>
+            <label htmlFor="link">Link</label><br/>
+            <input type="text" name="link" className="link" value={this.state.link} onChange={this.handleChange} /><br/>
             <input type="submit" value="Add Item"/>
         </form>;
     }
