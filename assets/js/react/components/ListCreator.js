@@ -4,34 +4,25 @@ import ListItem from "./ListItem";
 
 class ListCreator extends Component {
 
-    constructor(props) {
+    constructor(props)
+    {
         super(props);
 
         this.host = "http://localhost:8080";
 
         this.state = {
             items: [],
-            displayItems: false,
             alertMessage: false
         }
 
-        this.handleAddListItem = this.handleAddListItem.bind(this);
         this.handleRemoveItem = this.handleRemoveItem.bind(this);
-        this.handleSendList=this.handleSendList.bind(this);
+        this.handleSendGiftData = this.handleSendGiftData.bind(this);
     }
 
-    handleAddListItem(newItem) {
-        this.setState(state => {
-            const items = [...state.items, newItem];
 
-            return {
-                items,
-                displayItems: true,
-            };
-        });
-    }
 
-    handleRemoveItem(itemId) {
+    handleRemoveItem(itemId)
+    {
         const id = parseInt(itemId)
         const items = this.state.items;
         items.splice(
@@ -46,7 +37,8 @@ class ListCreator extends Component {
         }
     }
 
-    postData(url, data) {
+    postData(url, data)
+    {
         const response = fetch(url , {
             method: "POST",
             cache:"no-cache",
@@ -60,24 +52,36 @@ class ListCreator extends Component {
         return response;
     }
 
-    handleSendList()
+    handleSendGiftData(gift)
     {
-        this.postData(this.host + "/api/gift-list", this.state.items)
+        this.postData(this.host + "/api/gift-list", gift)
             .then(response => response.json())
             .then(data => {
-                this.setState({alertMessage: data.message})
-            });
+                if(data.status === "success") {
+                    this.setState(state => {
+                        const items = [...state.items, gift];
+
+                        return {
+                            items,
+                            alertMessage: data.message,
+                        };
+                    });
+                }else {
+                    this.setState({ alertMessage: data.message});
+                }
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+        });
     }
 
     render() {
         return (
             <div>
-                <FormAddItem hanldeAddListItem={this.handleAddListItem}></FormAddItem><br/>
-                {this.state.displayItems ?
+                <FormAddItem handleSendGiftData={this.handleSendGiftData}></FormAddItem><br/>
+                {this.state.items.length > 0 ?
                     <ListItem listItems={this.state.items} handleRemoveItem={this.handleRemoveItem}></ListItem> : ""
-                }
-                {this.state.displayItems ?
-                    <button onClick={this.handleSendList}>Send List</button>: ""
                 }
                 {this.state.alertMessage ?
                     <p>{this.state.alertMessage}</p> : ""

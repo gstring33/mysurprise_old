@@ -16,48 +16,55 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class GiftController extends AbstractController
 {
-    const SUCCES = "Ihre Liste wurde erfolgreich gespeichert";
-    const FAILED = "Ihre Liste kann nicht gespeichert werden";
+    const SUCCES_MESSAGE = "Ihre Geschenksidee wurde erfolgreich gespeichert";
+    const FAILED_MESSAGE = "Ihre Geschenkensidee kann nicht gespeichert werden";
+    const SUCCESS_STATUS = "success";
+    const FAILED_STATUS = "failed";
 
     /**
      * @Route("/gift-list", name="api_gift", methods={"POST"})
      * @param Request $request
+     * @param ValidatorInterface $validator
      * @return Response
      */
     public function postGift(Request $request, ValidatorInterface $validator): Response
     {
-        $datas= json_decode($request->getContent(), true);
+        $data= json_decode($request->getContent(), true);
 
-        if(count($datas) > 0 ) {
-            $user = $this->getUser();
-            $listUser = $user->getGiftsList();
-            $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $listUser = $user->getGiftsList();
+        $em = $this->getDoctrine()->getManager();
 
-            foreach ($datas as $data) {
-                $gift = new Gift();
-                $gift->setTitle($data["title"])
-                    ->setDescription($data["description"])
-                    ->setLink($data["link"]);
-                $listUser->addGift($gift);
-                $errors = $validator->validate($gift);
-                if(count($errors) > 0) {
-                    $message = str_replace("{{value}}", $data['link'], $errors->get(0)->getMessage());
+        $gift = new Gift();
+        $gift->setTitle($data["title"])
+            ->setDescription($data["description"])
+            ->setLink($data["link"]);
+        $listUser->addGift($gift);
 
-                    return new Response(
-                        json_encode(["message" => self::FAILED . ". " . $message])
-                    );
-                }
-                $em->persist($gift);
-            }
-
-            $em->flush();
+        $errors = $validator->validate($gift);
+        if(count($errors) > 0) {
+            $message = str_replace("{{value}}", $data['link'], $errors->get(0)->getMessage());
 
             return new Response(
-                json_encode(["message" => self::SUCCES]),
-                Response::HTTP_OK,
+                json_encode([
+                    "status" => self::FAILED_STATUS,
+                    "message" => self::FAILED_MESSAGE . ". " . $message
+                ]),
+                Response::HTTP_BAD_REQUEST,
                 ["Content-type" => "application/json"]
             );
-
         }
+        $em->persist($gift);
+
+        $em->flush();
+
+        return new Response(
+            json_encode([
+                "status" => self::SUCCESS_STATUS,
+                "message" => self::SUCCES_MESSAGE
+            ]),
+            Response::HTTP_OK,
+            ["Content-type" => "application/json"]
+        );
     }
 }

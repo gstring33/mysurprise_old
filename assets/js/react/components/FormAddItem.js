@@ -22,14 +22,14 @@ class FormAddItem extends Component {
             return
         }
 
-        let item = {
+        let gift = {
             id: Math.floor(Math.random() * 1000000) + 1,
             title: this.state.title,
             description: this.state.description,
             link: this.state.link
         }
         this.resetForm();
-        this.props.hanldeAddListItem(item);
+        this.props.handleSendGiftData(gift);
     }
 
     handleChange(event) {
