@@ -20,7 +20,7 @@ class ListItem extends Component {
                     <th>title</th>
                     <th>Description</th>
                     <th>link</th>
-                    <th>Remove</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>

@@ -16,13 +16,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class GiftController extends AbstractController
 {
-    const SUCCES_MESSAGE = "Ihre Geschenksidee wurde erfolgreich gespeichert";
+    const SUCCESS_POST_MESSAGE = "Ihre Geschenksidee wurde erfolgreich gespeichert";
+    const SUCCESS_DELETE_MESSAGE = "Ihre Geschenksidee wurde erfolgreich entfernt";
     const FAILED_MESSAGE = "Ihre Geschenkensidee kann nicht gespeichert werden";
     const SUCCESS_STATUS = "success";
     const FAILED_STATUS = "failed";
 
     /**
-     * @Route("/gift-list", name="api_gift", methods={"POST"})
+     * @Route("/gift", name="api_post_gift", methods={"POST"})
      * @param Request $request
      * @param ValidatorInterface $validator
      * @return Response
@@ -61,7 +62,35 @@ class GiftController extends AbstractController
         return new Response(
             json_encode([
                 "status" => self::SUCCESS_STATUS,
-                "message" => self::SUCCES_MESSAGE
+                "message" => self::SUCCESS_POST_MESSAGE,
+                "content" => [
+                    'id' => $gift->getId(),
+                    'title' => $gift->getTitle(),
+                    'description' => $gift->getDescription(),
+                    'link' => $gift->getLink()
+                ]
+            ]),
+            Response::HTTP_OK,
+            ["Content-type" => "application/json"]
+        );
+    }
+
+    /**
+     * @Route("/gift/{id}", name="api_delete_gift", methods={"DELETE"})
+     * @param Request $request
+     * @return Response
+     */
+    public function deleteGift(Request $request, Gift $gift): Response
+    {
+        //TODO: validate if the user is ollowed to delete the ressource
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($gift);
+        $em->flush();
+
+        return new Response(
+            json_encode([
+                "status" => self::SUCCESS_STATUS,
+                "message" => self::SUCCESS_DELETE_MESSAGE
             ]),
             Response::HTTP_OK,
             ["Content-type" => "application/json"]

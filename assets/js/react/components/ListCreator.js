@@ -19,18 +19,26 @@ class ListCreator extends Component {
         this.handleSendGiftData = this.handleSendGiftData.bind(this);
     }
 
-
-
     handleRemoveItem(itemId)
     {
         const id = parseInt(itemId)
-        const items = this.state.items;
-        items.splice(
-            items.findIndex(item => item.id === id),
-            1
-        )
+        const url = this.host + "/api/gift/" + itemId;
 
-        this.setState({items: items})
+        this.deleteData(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    const items = this.state.items;
+                    items.splice(
+                        items.findIndex(item => item.id === id),
+                        1
+                    )
+
+                    this.setState({items: items})
+                }else {
+                    this.setState({ alertMessage: data.message});
+                }
+            })
 
         if(this.state.items.length === 0) {
             this.setState({displayItems: false})
@@ -52,14 +60,25 @@ class ListCreator extends Component {
         return response;
     }
 
+    deleteData(url)
+    {
+        const response = fetch(url , {
+            method: "DELETE",
+            cache:"no-cache",
+            credentials: "same-origin",
+        });
+
+        return response;
+    }
+
     handleSendGiftData(gift)
     {
-        this.postData(this.host + "/api/gift-list", gift)
+        this.postData(this.host + "/api/gift", gift)
             .then(response => response.json())
             .then(data => {
                 if(data.status === "success") {
                     this.setState(state => {
-                        const items = [...state.items, gift];
+                        const items = [...state.items, data.content];
 
                         return {
                             items,
