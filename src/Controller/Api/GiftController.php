@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Gift;
+use App\Service\GiftManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +22,18 @@ class GiftController extends AbstractController
     const FAILED_MESSAGE = "Ihre Geschenkensidee kann nicht gespeichert werden";
     const SUCCESS_STATUS = "success";
     const FAILED_STATUS = "failed";
+
+    /** @var GiftManager */
+    private $giftManager;
+
+    /**
+     * GiftController constructor.
+     * @param GiftManager $giftManager
+     */
+    public function __construct(GiftManager $giftManager)
+    {
+        $this->giftManager = $giftManager;
+    }
 
     /**
      * @Route("/gift", name="api_post_gift", methods={"POST"})
@@ -94,6 +107,23 @@ class GiftController extends AbstractController
             ]),
             Response::HTTP_OK,
             ["Content-type" => "application/json"]
+        );
+    }
+
+    /**
+     * @Route("/gifts", name="api_get_gifts", methods={"GET"})
+     * @param Request $request
+     * @return Response
+     */
+    public function getGifts(Request $request): Response
+    {
+        $gifts = $this->getUser()->getGiftsList()->getGifts();
+
+        return new Response(
+            json_encode([
+               "status" => self::SUCCESS_STATUS,
+                "content" => $this->giftManager->formatGiftsResults($gifts)
+            ])
         );
     }
 }
