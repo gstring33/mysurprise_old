@@ -56,7 +56,7 @@ class GiftController extends AbstractController
             );
         }
         $em->persist($gift);
-
+        //EVENT postPersist => ListPublisher
         $em->flush();
 
         return new Response(
@@ -82,9 +82,9 @@ class GiftController extends AbstractController
      */
     public function deleteGift(Request $request, Gift $gift): Response
     {
-        //TODO: validate if the user is ollowed to delete the ressource
         $em = $this->getDoctrine()->getManager();
         $em->remove($gift);
+        //EVENT postRemove => ListUnPublisher
         $em->flush();
 
         return new Response(
