@@ -26,6 +26,14 @@ services:
     App\Controller\:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
+    App\Controller\Api\:
+        resource: '../src/Controller/Api'
+        tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Event Listeners
+    App\EventListener\ListPublisher:
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+    App\EventListener\ListUnPublisher:
+        tags:
+            - { name: doctrine.event_listener, event: postRemove }

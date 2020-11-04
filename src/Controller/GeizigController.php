@@ -15,23 +15,18 @@ class GeizigController extends AbstractController
     private $giftsListRepository;
     /** @var UserRepository */
     private $userRepository;
-    /** @var ListManager */
-    private $listManager;
 
     /**
      * GeizigController constructor.
      * @param GiftsListRepository $giftsListRepository
      * @param UserRepository $userRepository
-     * @param ListManager $listManager
      */
     public function __construct(
         GiftsListRepository $giftsListRepository,
-        UserRepository $userRepository,
-        ListManager $listManager
+        UserRepository $userRepository
     ){
         $this->giftsListRepository = $giftsListRepository;
         $this->userRepository = $userRepository;
-        $this->listManager = $listManager;
     }
 
     /**
@@ -51,42 +46,24 @@ class GeizigController extends AbstractController
     }
 
     /**
-     * @Route("liste-handeln", name="app_manage_list")
-     * @return Response
-     */
-    public function manageList()
-    {
-        return $this->render('geizig/manage_list.html.twig', [
-            'page' => 'Liste handeln',
-        ]);
-    }
-
-    /**
      * @Route("jemanden-auswählen", name="app_select_someone")
      * @return Response
      */
     public function selectSomeone()
     {
-        return $this->render('geizig/select_someone.html.twig', [
+        return $this->render('geizig/manage_list.html.twig', [
             'page' => 'Jemanden auswählen',
         ]);
     }
 
     /**
-     * @Route("liste-erstellen", name="app_create_liste")
+     * @Route("liste-handeln", name="app_manage_liste")
      * @return Response
      */
-    public function createList()
+    public function manageList()
     {
-        $username = $this->getUser()->getUsername();
-        $isAllowedToCreateList  = $this->listManager->isAllowedToCreateList($username);
-
-        if(!$isAllowedToCreateList) {
-            return $this->redirect($this->generateUrl("app_home"));
-        }
-
-        return $this->render('geizig/create_list.html.twig', [
-            'page' => 'Liste erstellen'
+        return $this->render('geizig/manage_list.html.twig', [
+            'page' => 'Liste manager'
         ]);
     }
 }

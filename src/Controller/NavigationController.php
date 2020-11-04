@@ -22,11 +22,6 @@ class NavigationController extends AbstractController
 
     public function navigation(): Response
     {
-        $username = $this->getUser()->getUsername();
-        $isAllowedToManageList = $this->listManager->isAllowedToManageList($username);
-
-        return $this->render('common/nav.html.twig', [
-            'isAllowedToManageList' => $isAllowedToManageList,
-        ]);
+        return $this->render('common/nav.html.twig', []);
     }
 }
