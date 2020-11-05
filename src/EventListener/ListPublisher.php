@@ -41,7 +41,7 @@ class ListPublisher
         }
 
         $user =$this->security->getUser();
-        if(!$user->getIsAllowedToSelectUser()) {
+        if(!$user->getIsAllowedToSelectUser() AND $user->getSelectedUser() === NULL) {
             $user->setIsAllowedToSelectUser(1);
             $em->persist($user);
         }
