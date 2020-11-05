@@ -97,7 +97,6 @@ class GiftController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($gift);
-        //EVENT postRemove => ListUnPublisher
         $em->flush();
 
         return new Response(
