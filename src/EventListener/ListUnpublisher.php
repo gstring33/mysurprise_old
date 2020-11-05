@@ -7,7 +7,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Security;
 
-class ListPublisher
+class ListUnpublisher
 {
     /** @var Security */
     private $security;
@@ -26,7 +26,7 @@ class ListPublisher
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function postPersist (LifecycleEventArgs $args)
+    public function postRemove (LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
         if(!$entity instanceof Gift) {
@@ -35,17 +35,12 @@ class ListPublisher
 
         $em = $args->getEntityManager();
         $currentGiftList = $entity->getGiftList();
-        if(!$currentGiftList->getIsPublished()) {
-            $currentGiftList->setIsPublished(1);
+        if(count($currentGiftList->getGifts()) === 0) {
+            $currentGiftList->setIsPublished(0);
             $em->persist($currentGiftList);
-        }
-
-        $user =$this->security->getUser();
-        if(!$user->getIsAllowedToSelectUser()) {
-            $user->setIsAllowedToSelectUser(1);
+            $user = $this->security->getUser()->setIsAllowedToSelectUser(0);
             $em->persist($user);
+            $em->flush();
         }
-
-        $em->flush();
     }
 }

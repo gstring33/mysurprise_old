@@ -5,28 +5,23 @@ namespace App\Controller;
 use App\Repository\GiftsListRepository;
 use App\Repository\UserRepository;
 use App\Service\ListManager;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class GeizigController extends AbstractController
 {
-    /** @var GiftsListRepository */
-    private $giftsListRepository;
-    /** @var UserRepository */
-    private $userRepository;
+    /** @var UserService */
+    private $userService;
 
     /**
      * GeizigController constructor.
-     * @param GiftsListRepository $giftsListRepository
-     * @param UserRepository $userRepository
+     * @param UserService $userService
      */
-    public function __construct(
-        GiftsListRepository $giftsListRepository,
-        UserRepository $userRepository
-    ){
-        $this->giftsListRepository = $giftsListRepository;
-        $this->userRepository = $userRepository;
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
     }
 
     /**
@@ -35,13 +30,9 @@ class GeizigController extends AbstractController
      */
     public function index(): Response
     {
-        $totalUsers = count($this->userRepository->findAll());
-        $totalPublishedList = count($this->giftsListRepository->findPublishedList());
-
-        return $this->render('geizig/index.html.twig', [
+        return $this->render('geizig/index.html.twig',[
             'page' => 'Homepage',
-            'totalLists' => $totalUsers,
-            'publishedLists' => $totalPublishedList
+            "hasAlreadySelectedUser" => $this->userService->hasAlreadySelectedUser()
         ]);
     }
 

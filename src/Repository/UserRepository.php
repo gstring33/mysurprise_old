@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\GiftsList;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -42,26 +43,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->andWhere('u.username = :val')
             ->setParameter('val', $username)
             ->getQuery()
-            ->getResult()[0]
-            ;
+            ->getResult()[0];
     }
-
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
     /*
     public function findOneBySomeField($value): ?User

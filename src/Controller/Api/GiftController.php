@@ -3,7 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Gift;
-use App\Service\GiftManager;
+use App\Service\GiftService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,16 +23,16 @@ class GiftController extends AbstractController
     const SUCCESS_STATUS = "success";
     const FAILED_STATUS = "failed";
 
-    /** @var GiftManager */
+    /** @var GiftService */
     private $giftManager;
 
     /**
      * GiftController constructor.
-     * @param GiftManager $giftManager
+     * @param GiftService $giftService
      */
-    public function __construct(GiftManager $giftManager)
+    public function __construct(GiftService $giftService)
     {
-        $this->giftManager = $giftManager;
+        $this->giftService = $giftService;
     }
 
     /**
@@ -97,6 +97,7 @@ class GiftController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($gift);
+        //EVENT postRemove => ListUnpublisher
         $em->flush();
 
         return new Response(
@@ -121,7 +122,7 @@ class GiftController extends AbstractController
         return new Response(
             json_encode([
                "status" => self::SUCCESS_STATUS,
-                "content" => $this->giftManager->formatGiftsResults($gifts)
+                "content" => $this->giftService->formatGiftsResults($gifts)
             ])
         );
     }

@@ -4,7 +4,7 @@ namespace App\Service;
 
 use Doctrine\ORM\PersistentCollection;
 
-class GiftManager
+class GiftService
 {
     public function formatGiftsResults(PersistentCollection $gifts)
     {

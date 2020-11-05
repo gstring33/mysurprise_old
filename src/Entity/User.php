@@ -217,6 +217,9 @@ class User implements UserInterface
         return $this->isAllowedToSelectUser;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function setIsAllowedToSelectUser(bool $isAllowedToSelectUser): self
     {
         $this->isAllowedToSelectUser = $isAllowedToSelectUser;

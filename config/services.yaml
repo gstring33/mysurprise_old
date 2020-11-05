@@ -34,3 +34,6 @@ services:
     App\EventListener\ListPublisher:
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+    App\EventListener\ListUnpublisher:
+        tags:
+            - { name: doctrine.event_listener, event: postRemove }

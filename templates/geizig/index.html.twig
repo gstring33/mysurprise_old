@@ -6,20 +6,14 @@
     <div>
         <h1>Hello {{ app.user.firstname }} {{ app.user.lastname }} - {{ app.user.id }}</h1>
         <div>
-            {% if app.user.isAllowedToSelectUser %}
-                {% if user.selectedUser is null %}
-                    Sie können nun die Person auswählen, die Ihr Geschenk erhalten soll
-                {% else %}
-                    {{ user.selectedUser.firstname }} wird Ihr Geschenk erhalten
-                {% endif %}
-            {% else %}
-                <p>Published List : {{ publishedLists }} / {{ totalLists }}</p>
-                {% if app.user.giftsList is null %}
-                    <p>Ihre Liste wurde noch nicht veröffentlicht. Klicken Sie hier, um es zu veröffentlichen</p>
-                {% else %}
-                    Du hast deine List erfolreich publiziert aber andere Benutzer haben ihre Liste noch nicht veröffentlicht
-                {% endif %}
-            {% endif %}
+           {% if app.user.isAllowedToSelectUser and not hasAlreadySelectedUser %}
+               You are allowed to select User
+           {% elseif not app.user.isAllowedToSelectUser and not hasAlreadySelectedUser%}
+                You have to create your list first
+           {% elseif hasAlreadySelectedUser%}
+                {% set userSelected = app.user.selectedUser %}
+                You have selected {{ userSelected.firstname }} {{ userSelected.lastname }}
+           {% endif %}
         </div>
     </div>
 {% endblock %}
