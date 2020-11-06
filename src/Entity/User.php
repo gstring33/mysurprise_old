@@ -64,6 +64,11 @@ class User implements UserInterface
      */
     private $isAllowedToSelectUser;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $hash;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -223,6 +228,21 @@ class User implements UserInterface
     public function setIsAllowedToSelectUser(bool $isAllowedToSelectUser): self
     {
         $this->isAllowedToSelectUser = $isAllowedToSelectUser;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getHash(): ?string
+    {
+        return $this->hash;
+    }
+
+    public function setHash(string $hash): self
+    {
+        $this->hash = $hash;
 
         return $this;
     }

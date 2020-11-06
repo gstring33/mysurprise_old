@@ -37,7 +37,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setPassword($this->encoder->encodePassword($user, '12345'))
                 ->setUsername(lcfirst($firstname) . "." . lcfirst($lastname))
                 ->setGiftsList( ($this->getReference(GiftListFixtures::REF_GIFT_LIST . $i)))
-                ->setIsAllowedToSelectUser(0);
+                ->setIsAllowedToSelectUser(0)
+                ->setHash(md5($firstname . "." . $lastname));
 
             $manager->persist($user);
         }
@@ -50,7 +51,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setPassword($this->encoder->encodePassword($super_admin, '12345'))
             ->setUsername('martin.dhenu')
             ->setGiftsList( ($this->getReference(GiftListFixtures::REF_GIFT_LIST . "3")))
-            ->setIsAllowedToSelectUser(0);
+            ->setIsAllowedToSelectUser(0)
+            ->setHash(md5("Martin.Dhenu"));
         $manager->persist($super_admin);
 
         $manager->flush();
