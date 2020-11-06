@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Geizig - {{ page }}{% endblock %}
+
+{% block body %}
+    <div>
+        <h1>{{ page }}</h1>
+        <div>
+            {% if list is empty %}
+                Die Liste von {{ selectedUser.firstname }} ist im Moment Leer !!!
+            {% else %}
+                {% for gift in list %}
+                    <ul>
+                        <li>{{ gift.title }}</li>
+                        {% if  gift.description is not empty %}
+                            <li>{{ gift.description }}</li>
+                        {% endif%}
+                        {% if  gift.link is not empty %}
+                            <li>{{ gift.link }}</li>
+                        {% endif%}
+                    </ul>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

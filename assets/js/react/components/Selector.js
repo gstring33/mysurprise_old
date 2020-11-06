@@ -34,7 +34,10 @@ class Selector extends Component {
         return <div>
             {this.state.selection === null ?
                 <button onClick={this.handleOnSelect}>SELECT SOMEONE</button> :
-                <p>Du hast {this.state.selection.firstname} gewählt</p>
+                <div>
+                    <p>Du hast {this.state.selection.firstname} gewählt</p>
+                    <a href={this.state.selection.listPath}>List von {this.state.selection.firstname} ansehen </a>
+                </div>
             }
         </div>
     }

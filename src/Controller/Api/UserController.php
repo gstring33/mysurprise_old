@@ -63,6 +63,7 @@ class UserController extends AbstractController
                 "content" => [
                     "firstname" => $userSelected->getFirstname(),
                     "lastname" => $userSelected->getLastname(),
+                    "listPath" => $this->generateUrl('app_user_list'),
                     "image" => ""
                 ]
             ])

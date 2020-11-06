@@ -12,7 +12,8 @@
                 You have to create your list first
            {% elseif hasAlreadySelectedUser%}
                 {% set userSelected = app.user.selectedUser %}
-                You have selected {{ userSelected.firstname }} {{ userSelected.lastname }}
+                <p>You have selected {{ userSelected.firstname }} {{ userSelected.lastname }}</p>
+               <a href="{{ url('app_user_list') }}">Liste von {{ userSelected.firstname }}</a>
            {% endif %}
         </div>
     </div>
