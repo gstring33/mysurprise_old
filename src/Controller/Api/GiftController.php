@@ -90,10 +90,10 @@ class GiftController extends AbstractController
 
     /**
      * @Route("/gift/{id}", name="api_delete_gift", methods={"DELETE"})
-     * @param Request $request
+     * @param Gift $gift
      * @return Response
      */
-    public function deleteGift(Request $request, Gift $gift): Response
+    public function deleteGift(Gift $gift): Response
     {
         $em = $this->getDoctrine()->getManager();
         $em->remove($gift);

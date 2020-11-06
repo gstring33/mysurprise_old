@@ -23,8 +23,8 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app-react', './assets/js/react/app.js')
-    //.addEntry('page1', './assets/page1.js')
+    .addEntry('app-react-list', './assets/js/react/app-list.js')
+    .addEntry('app-react-select', './assets/js/react/app-select.js')
     //.addEntry('page2', './assets/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

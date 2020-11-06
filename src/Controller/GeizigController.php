@@ -42,7 +42,7 @@ class GeizigController extends AbstractController
      */
     public function selectSomeone()
     {
-        return $this->render('geizig/manage_list.html.twig', [
+        return $this->render('geizig/select_someone.html.twig', [
             'page' => 'Jemanden auswählen',
         ]);
     }

@@ -45,7 +45,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()
             ->getResult()[0];
     }
-
+    public function findOtherUsersNotSelected($currentUserId)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.id != :id')
+            ->andWhere('u.isSelected = :isSelected')
+            ->setParameter('id', $currentUserId)
+            ->setParameter('isSelected', 0)
+            ->getQuery()
+            ->getResult();
+    }
     /*
     public function findOneBySomeField($value): ?User
     {

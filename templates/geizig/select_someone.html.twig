@@ -5,5 +5,10 @@
 {% block body %}
     <div>
         <h1>Hello {{ app.user.firstname }} {{ app.user.lastname }} - {{ app.user.id }} - {{ page }}</h1>
+        <div id="root"></div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app-react-select') }}
 {% endblock %}

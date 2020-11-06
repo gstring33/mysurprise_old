@@ -115,13 +115,13 @@ class ListCreator extends Component {
 
     getData(url)
     {
-        const resposne = fetch(url, {
+        const response = fetch(url, {
             method: "GET",
             cache:"no-cache",
             credentials: "same-origin",
         });
 
-        return resposne;
+        return response;
     }
 
     render() {
