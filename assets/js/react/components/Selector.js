@@ -5,6 +5,8 @@ class Selector extends Component {
         super(props);
         this.host = "http://localhost:8080";
         this.handleOnSelect = this.handleOnSelect.bind(this)
+
+        this.state = {selection: null}
     }
 
     getData(url) {
@@ -29,8 +31,12 @@ class Selector extends Component {
     }
 
     render() {
-        return <button onClick={this.handleOnSelect}>SELECT SOMEONE</button>
-
+        return <div>
+            {this.state.selection === null ?
+                <button onClick={this.handleOnSelect}>SELECT SOMEONE</button> :
+                <p>Du hast {this.state.selection.firstname} gewählt</p>
+            }
+        </div>
     }
 }
 

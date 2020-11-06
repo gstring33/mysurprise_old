@@ -52,6 +52,7 @@ class UserController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $userSelected->setIsSelected(1);
         $user->setSelectedUser($userSelected);
+        $user->setIsAllowedToSelectUser(0);
         $em->flush();
 
         //TODO: implement image user
