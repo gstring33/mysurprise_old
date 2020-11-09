@@ -13,7 +13,8 @@
            {% elseif hasAlreadySelectedUser%}
                 {% set userSelected = app.user.selectedUser %}
                 <p>You have selected {{ userSelected.firstname }} {{ userSelected.lastname }}</p>
-               <a href="{{ url('app_user_list') }}">Liste von {{ userSelected.firstname }}</a>
+                <p><a href="{{ url('app_user_list') }}">Liste von {{ userSelected.firstname }}</a></p>
+                <p><img src="{{ userSelected.image }}" alt="profil-{{ userSelected.firstname }}"></p>
            {% endif %}
         </div>
     </div>

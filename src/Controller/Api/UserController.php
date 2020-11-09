@@ -55,7 +55,6 @@ class UserController extends AbstractController
         $user->setIsAllowedToSelectUser(0);
         $em->flush();
 
-        //TODO: implement image user
         return new Response(
             json_encode([
                 "status" => self::SUCCESS_STATUS,
@@ -64,7 +63,7 @@ class UserController extends AbstractController
                     "firstname" => $userSelected->getFirstname(),
                     "lastname" => $userSelected->getLastname(),
                     "listPath" => $this->generateUrl('app_user_list'),
-                    "image" => ""
+                    "image" => $userSelected->getImage()
                 ]
             ])
         );

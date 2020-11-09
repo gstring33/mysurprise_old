@@ -36,6 +36,7 @@ class Selector extends Component {
                 <button onClick={this.handleOnSelect}>SELECT SOMEONE</button> :
                 <div>
                     <p>Du hast {this.state.selection.firstname} gewählt</p>
+                    <div><img src={this.state.selection.image} alt={"profil-" + this.state.selection.firstname}/></div>
                     <a href={this.state.selection.listPath}>List von {this.state.selection.firstname} ansehen </a>
                 </div>
             }
