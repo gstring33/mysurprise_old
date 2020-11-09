@@ -1,4 +1,6 @@
 var Encore = require('@symfony/webpack-encore');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -7,6 +9,9 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore
+    .configureFilenames({
+        fonts: 'fonts/[name].[ext]'
+    })
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
 
@@ -18,6 +23,10 @@ Encore
             //to: 'images/[path][name].[hash:8].[ext]',
             // only copy files matching this pattern
             //pattern: /\.(png|jpg|jpeg)$/
+    })
+    .copyFiles({
+        from: './assets/fonts',
+        to: 'fonts/[path][name].[ext]',
     })
     // public path used by the web server to access the output path
     .setPublicPath('/build')
@@ -35,9 +44,10 @@ Encore
      */
     .addEntry('app-react-list', './assets/js/react/app-list.js')
     .addEntry('app-react-select', './assets/js/react/app-select.js')
+    .addEntry('app', './assets/js/app.js')
+    .addEntry('app-login', './assets/js/app-login.js')
     //.addEntry('page2', './assets/page2.js')
 
-    .addStyleEntry('app', './assets/styles/app.scss')
     .enableSassLoader()
     .autoProvidejQuery()
 
@@ -67,8 +77,6 @@ Encore
         config.corejs = 3;
     })
 
-    // enables Sass/SCSS support
-    //.enableSassLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -77,8 +85,7 @@ Encore
     // requires WebpackEncoreBundle 1.4 or higher
     //.enableIntegrityHashes(Encore.isProduction())
 
-    // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     .enableReactPreset()

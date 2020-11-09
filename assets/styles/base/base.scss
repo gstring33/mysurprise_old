@@ -1,0 +1,17 @@
+p, a, label, input, button {
+  font-family: 'roboto-regular', 'sans-serif';
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'roboto-medium', 'sans-serif';
+}
+
+h1 {
+  color: $primary;
+}
+
+small.title {
+    font-size: 22px;
+    font-family: 'roboto-thin';
+    color: $primary;
+}

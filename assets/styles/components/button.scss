@@ -1,0 +1,35 @@
+.btn-primary {
+  color: #fff;
+  background-color: $primary;
+  border-color: $primary;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: $green-dark;
+  border-color: $green-dark;
+}
+
+.btn-primary:active {
+  color: #fff;
+  background-color: $green-dark;
+  border-color: $green-dark;
+}
+
+.btn-primary:focus {
+  color: #fff;
+  background-color: $green-dark;
+  border-color: $green-dark;
+}
+
+.btn-primary:visited {
+  color: #fff;
+  background-color: $green-dark;
+  border-color: $green-dark;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active {
+  color: #fff;
+  background-color: $green-dark;
+  border-color: $green-dark;
+}
