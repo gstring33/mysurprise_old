@@ -37,6 +37,10 @@ Encore
     .addEntry('app-react-select', './assets/js/react/app-select.js')
     //.addEntry('page2', './assets/page2.js')
 
+    .addStyleEntry('app', './assets/styles/app.scss')
+    .enableSassLoader()
+    .autoProvidejQuery()
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 

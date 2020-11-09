@@ -1,0 +1,6 @@
+@import "~bootstrap/scss/bootstrap";
+@import "./components/variables";
+
+h1, p {
+  color: $primary;
+}
