@@ -10,4 +10,13 @@
     margin: auto;
     margin-top: 20px;
   }
+
+  &-teaser {
+    font-size: 30px;
+
+    &-name {
+      font-size: 40px;
+      color: $secondary;
+    }
+  }
 }

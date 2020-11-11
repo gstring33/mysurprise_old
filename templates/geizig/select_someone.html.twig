@@ -3,9 +3,11 @@
 {% block title %}Geizig - {{ page }}{% endblock %}
 
 {% block body %}
-    <div>
-        <h1>Hello {{ app.user.firstname }} {{ app.user.lastname }} - {{ app.user.id }} - {{ page }}</h1>
-        <div id="root"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="title-secondary"><i class="fas fa-dice"></i> Partner ziehen</h3>
+        </div>
+        <div id="root" class="col-md-12 mt-5"></div>
     </div>
 {% endblock %}
 

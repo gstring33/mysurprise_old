@@ -31,16 +31,18 @@ class Selector extends Component {
     }
 
     render() {
-        return <div>
+        return <React.Fragment>
             {this.state.selection === null ?
-                <button onClick={this.handleOnSelect}>SELECT SOMEONE</button> :
-                <div>
-                    <p>Du hast {this.state.selection.firstname} gewählt</p>
-                    <div><img src={this.state.selection.image} alt={"profil-" + this.state.selection.firstname}/></div>
-                    <a href={this.state.selection.listPath}>List von {this.state.selection.firstname} ansehen </a>
+                <button className="btn btn-primary btn-lg btn-block" onClick={this.handleOnSelect}>Start ziehen</button> :
+                <div className="card text-center mb-4 shadow-sm">
+                    <img src={this.state.selection.image} className="card-img-top rounded-circle" alt={"select-" + this.state.selection.firstname}/>
+                        <div className="card-body">
+                            <p className="card-text card-teaser">Du hast <span className="card-teaser-name">{this.state.selection.firstname}</span> gezogen !!!</p>
+                            <a href="/" type="button" className="btn btn-secondary mb-2 ml-3"><i className="far fa-arrow-alt-circle-left fa-button"></i> Zurück</a>
+                        </div>
                 </div>
             }
-        </div>
+        </React.Fragment>;
     }
 }
 

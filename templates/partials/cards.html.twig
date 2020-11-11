@@ -7,14 +7,16 @@
         {% endfor %}
         </ul>
     {% endif %}
-    <a href="{{ url('app_manage_liste') }}" role="button" class="btn btn-lg btn-primary btn-block mt-3">Meine Liste bearbeiten</a>
+    <a href="{{ url('app_manage_liste') }}" role="button" class="btn btn-lg btn-primary btn-block mt-3">
+        <i class="fa fa-cog mr-2" aria-hidden="true"></i> Meine Liste bearbeiten
+    </a>
 </div>
 <div class="col-md-4">
     {% if not userSelected %}
         <div class="card text-center mb-4 shadow-sm">
-            <img src="/build/images/select-primary.png" class="card-img-top rounded-circle" alt="select-{{ app.user.firstname }}">
+            <img src="/build/images/anonymous.png" class="card-img-top rounded-circle" alt="select-{{ app.user.firstname }}">
             <div class="card-body">
-                <a href="{{ url('app_select_someone') }}" class="btn btn-primary">Deinen Partner ziehen</a>
+                <a href="{{ url('app_select_someone') }}" class="btn btn-primary"><i class="fas fa-dice mr-2"></i> Deinen Partner ziehen</a>
             </div>
         </div>
     {% else %}
@@ -22,8 +24,13 @@
             <img src="{{ userSelected.image }}" class="card-img-top rounded-circle"  alt="profil-{{ userSelected.firstname }}">
             <div class="card-body">
                 <h5 class="card-title">{{ userSelected.firstname }}</h5>
-                <p class="card-text">{{ userSelected.firstname }} wird ein Geschenk von dir erhalten.</p>
-                <a href="{{ url('app_user_list') }}" class="btn btn-primary">Liste von {{ userSelected.firstname }} </a>
+                {% if userSelected.giftsList.gifts|length == 0 %}
+                    <p class="card-text">{{ userSelected.firstname }} hat zur Zeit keine Wünsche eingetragen</p>
+                    <a href="#" class="btn btn-primary disabled">Liste von {{ userSelected.firstname }}</a>
+                {% else %}
+                    <p class="card-text">{{ userSelected.firstname }} wird ein Geschenk von dir erhalten.</p>
+                    <a href="{{ url('app_user_list') }}" class="btn btn-primary">Liste von {{ userSelected.firstname }} </a>
+                {% endif %}
             </div>
         </div>
     {% endif %}

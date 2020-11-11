@@ -27,3 +27,8 @@
   background-color: $green-dark;
   border-color: $green-dark;
 }
+
+.btn-primary.disabled {
+  background-color: $gray-light;
+  border: 1px solid $gray-dark;
+}
