@@ -3,25 +3,27 @@
 {% block title %}Geizig - {{ page }}{% endblock %}
 
 {% block body %}
-    {% if not app.user.isAllowedToSelectUser and not hasAlreadySelectedUser%}
-        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-            <h1 class="display-4">Hallo {{ app.user.firstname }} ! </h1>
-            <h2>Schön, dass du da bist ... </h2>
-            <p class="lead">Bevor du jemanden ziehst, musst du zuerst deine Wunschliste erstellen</p>
-            <a href="{{ url('app_manage_liste') }}" role="button" class="btn btn-lg btn-primary">Meine Liste erstellen</a>
-        </div>
-    {% elseif app.user.isAllowedToSelectUser and not hasAlreadySelectedUser %}
-        {% include 'partials/cards.html.twig' with {
-            'userSelected': false,
-            'totalGifts': totalGifts,
-            'list': list
-        } %}
-    {% elseif hasAlreadySelectedUser%}
-        {% set userSelected = app.user.selectedUser %}
-        {% include 'partials/cards.html.twig' with {
-            'userSelected' : userSelected,
-            'totalGifts': totalGifts,
-            'list': list
-        } %}
-    {% endif %}
+    <div class="row">
+        {% if not app.user.isAllowedToSelectUser and not hasAlreadySelectedUser%}
+            <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                <h1 class="display-4">Hallo {{ app.user.firstname }} ! </h1>
+                <h2>Schön, dass du da bist ... </h2>
+                <p class="lead">Bevor du jemanden ziehst, musst du zuerst deine Wunschliste erstellen</p>
+                <a href="{{ url('app_manage_liste') }}" role="button" class="btn btn-lg btn-primary">Meine Liste erstellen</a>
+            </div>
+        {% elseif app.user.isAllowedToSelectUser and not hasAlreadySelectedUser %}
+            {% include 'partials/cards.html.twig' with {
+                'userSelected': false,
+                'totalGifts': totalGifts,
+                'list': list
+            } %}
+        {% elseif hasAlreadySelectedUser%}
+            {% set userSelected = app.user.selectedUser %}
+            {% include 'partials/cards.html.twig' with {
+                'userSelected' : userSelected,
+                'totalGifts': totalGifts,
+                'list': list
+            } %}
+        {% endif %}
+    </div>
 {% endblock %}

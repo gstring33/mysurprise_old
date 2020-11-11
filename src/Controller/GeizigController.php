@@ -64,7 +64,7 @@ class GeizigController extends AbstractController
     public function manageList()
     {
         return $this->render('geizig/manage_list.html.twig', [
-            'page' => 'Liste manager'
+            'page' => 'Liste bearbeiten'
         ]);
     }
 

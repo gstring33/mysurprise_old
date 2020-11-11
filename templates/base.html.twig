@@ -32,10 +32,8 @@
         {{ render(controller("App\\Controller\\NavigationController::navigation")) }}
     </div>
 
-    <div class="container">
-        <div class="row mt-5">
-            {% block body %}{% endblock %}
-        </div>
+    <div class="container mt-5">
+        {% block body %}{% endblock %}
         <footer class="pt-4 my-md-5 pt-md-5 border-top">
             <div class="row">
                 <div class="col-12 col-md">
@@ -47,21 +45,4 @@
     {% block javascripts %}{% endblock %}
 </body>
 </html>
-
-<!doctype html>
-<html lang="en">
-<head>
-
-
-
-    <!-- Custom styles for this template -->
-    <link href="pricing.css" rel="stylesheet">
-</head>
-<body>
-
-
-
-</body>
-</html>
-
 

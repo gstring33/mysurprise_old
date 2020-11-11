@@ -20,3 +20,17 @@ small.title {
 h3.nav-title {
   font-family: 'roboto-thin';
 }
+
+.title {
+  &-primary {
+    color: $primary;
+  }
+
+  &-secondary {
+    color: $secondary;
+  }
+}
+
+.is-required {
+  color: $danger;
+}
