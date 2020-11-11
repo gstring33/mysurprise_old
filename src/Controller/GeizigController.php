@@ -34,9 +34,13 @@ class GeizigController extends AbstractController
      */
     public function index(): Response
     {
+        $list = $this->getUser()->getGiftsList()->getGifts();
+
         return $this->render('geizig/index.html.twig',[
             'page' => 'Homepage',
-            "hasAlreadySelectedUser" => $this->userService->hasAlreadySelectedUser()
+            "hasAlreadySelectedUser" => $this->userService->hasAlreadySelectedUser(),
+            "totalGifts" => count($list),
+            "list" => $list
         ]);
     }
 

@@ -1,8 +1,12 @@
-<ul>
-    <li><a href="{{ url('app_home') }}">Home</a></li>
-    <li><a href="{{ url('app_manage_liste') }}">Manage your list</a></li>
+<h3 class="my-0 mr-md-auto nav-title">
+    <img src="/build/images/gift-primary.png" width="30" height="30" class="d-inline-block align-top mr-3" alt="" loading="lazy">
+    Das Perfekte Geschenk
+</h3>
+<nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-dark" href="{{ url('app_home') }}">Home</a>
+    <a class="p-2 text-dark" href="{{ url('app_manage_liste') }}">Liste bearbeiten</a>
     {% if app.user.isAllowedToSelectUser %}
-        <li><a href="{{ url('app_select_someone') }}">Select a personn</a></li>
+        <a class="p-2 text-dark" href="{{ url('app_select_someone') }}">Jemanden ziehen</a>
     {% endif %}
-    <li><a href="{{ url('app_logout') }}">Logout</a></li>
-</ul>
+</nav>
+<a class="btn btn-danger nav-logout" role="button" aria-pressed="true" href="{{ url('app_logout') }}">Logout</a>
