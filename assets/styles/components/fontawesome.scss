@@ -1,0 +1,19 @@
+.fa {
+  &-gift {
+    color: $secondary;
+    font-size: 25px;
+  }
+
+  &-trash {
+    color: $danger;
+  }
+
+  &-trash:hover {
+    color: #bd2130;
+    cursor: pointer;
+  }
+
+  &-button {
+    margin-right: 5px;
+  }
+}

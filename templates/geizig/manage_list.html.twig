@@ -3,9 +3,12 @@
 {% block title %}Geizig - {{ page }}{% endblock %}
 
 {% block body %}
-    <h1>{{ page }}</h1>
-    <p>INFO: Zum Erstellen Ihrer Liste muss mindestens eine Geschenkidee eingegeben werden  </p>
-    <div id="root"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="title-secondary"><i class="fa fa-cog" aria-hidden="true"></i> {{ page }}</h3>
+        </div>
+    </div>
+    <div id="root" class="row mt-5"></div>
 {% endblock %}
 
 {% block javascripts %}

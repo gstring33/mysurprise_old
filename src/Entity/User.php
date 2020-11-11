@@ -69,6 +69,11 @@ class User implements UserInterface
      */
     private $hash;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -243,6 +248,21 @@ class User implements UserInterface
     public function setHash(string $hash): self
     {
         $this->hash = $hash;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

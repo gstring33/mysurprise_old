@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import FormAddItem from "./FormAddItem";
 import ListItem from "./ListItem";
 
@@ -17,6 +17,11 @@ class ListCreator extends Component {
 
         this.handleRemoveItem = this.handleRemoveItem.bind(this);
         this.handleSendGiftData = this.handleSendGiftData.bind(this);
+        this.setAlertMessage = this.setAlertMessage.bind(this);
+    }
+
+    setAlertMessage(value) {
+        this.setState({alertMessage: value})
     }
 
     componentDidMount()
@@ -49,9 +54,7 @@ class ListCreator extends Component {
                         items.findIndex(item => item.id === id),
                         1
                     )
-                    this.setState({items: items})
-                }else {
-                    this.setState({ alertMessage: data.message});
+                    this.setState({items: items, alertMessage: false})
                 }
             })
             .catch((error) => {
@@ -72,13 +75,10 @@ class ListCreator extends Component {
                     this.setState(state => {
                         const items = [...state.items, data.content];
 
-                        return {
-                            items,
-                            alertMessage: data.message,
-                        };
+                        return { items, alertMessage: false };
                     });
                 }else {
-                    this.setState({ alertMessage: data.message});
+                    this.setAlertMessage({type: 'error', message: data.message});
                 }
 
             })
@@ -126,15 +126,21 @@ class ListCreator extends Component {
 
     render() {
         return (
-            <div>
-                <FormAddItem handleSendGiftData={this.handleSendGiftData}></FormAddItem><br/>
-                {this.state.items.length > 0 ?
-                    <ListItem listItems={this.state.items} handleRemoveItem={this.handleRemoveItem}></ListItem> : ""
-                }
+            <React.Fragment>
                 {this.state.alertMessage ?
-                    <p>{this.state.alertMessage}</p> : ""
+                    <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                        {this.state.alertMessage.message}
+                    </div> : ""
                 }
-            </div>
+                <div className="col-md-12">
+                    <FormAddItem handleSendGiftData={this.handleSendGiftData} setAlertMessage={this.setAlertMessage}></FormAddItem>
+                </div>
+                <div className="col-md-12 mt-5">
+                        {this.state.items.length > 0 ?
+                           <ListItem listItems={this.state.items} handleRemoveItem={this.handleRemoveItem}></ListItem> : ""
+                        }
+                </div>
+            </React.Fragment>
         )
     }
 }

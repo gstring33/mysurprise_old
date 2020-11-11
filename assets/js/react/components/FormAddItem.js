@@ -19,6 +19,7 @@ class FormAddItem extends Component {
         event.preventDefault();
 
         if(this.state.title === '') {
+            this.props.setAlertMessage({type:'error', message:'Der Titel muss korrekt eingegeben werden'})
             return
         }
 
@@ -51,14 +52,43 @@ class FormAddItem extends Component {
 
     render() {
         return <form onSubmit={this.handleSubmit}>
-            <label htmlFor="title">Title*</label><br/>
-            <input type="text" name="title" className="title" value={this.state.title} onChange={this.handleChange} /><br/>
-            <label htmlFor="description">Description</label><br/>
-            <textarea name="description" className="description" value={this.state.description} onChange={this.handleChange} rows="4" cols="50"></textarea><br/>
-            <label htmlFor="link">Link</label><br/>
-            <input type="text" placeholder="ex: https://amazon.de" name="link" className="link" value={this.state.link} onChange={this.handleChange} /><br/>
-            <input type="submit" value="Add Item"/>
-        </form>;
+                <div className="form-group">
+                    <label htmlFor="title">Title <span className="is-required">*</span></label>
+                    <input
+                        type="text"
+                        placeholder="Ex: ein Buch von Thomas Mann"
+                        name="title"
+                        className="title form-control"
+                        value={this.state.title}
+                        onChange={this.handleChange}
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Description</label>
+                    <textarea
+                        name="description"
+                        placeholder="Diese Beschreibung sollte es deinem Partner ermöglichen, deinen Wunsch vollständig zu verstehen."
+                        className="description form-control"
+                        value={this.state.description}
+                        onChange={this.handleChange}
+                        rows="4"
+                        cols="50">
+                </textarea>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="link">Link</label>
+                    <input
+                        type="text"
+                        placeholder="ex: https://amazon.de"
+                        name="link"
+                        className="link form-control"
+                        value={this.state.link}
+                        onChange={this.handleChange}
+                    />
+                </div>
+                <button type="submit" className="btn btn-primary mb-2"><i className="fas fa-cart-arrow-down fa-button"></i> Wunsch hinzufügen</button>
+                <a href="/" type="button" className="btn btn-secondary mb-2 ml-3"><i className="far fa-arrow-alt-circle-left fa-button"></i> Zurück</a>
+            </form>;
     }
 }
 

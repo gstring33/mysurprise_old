@@ -1,13 +1,48 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Das perfekte Geschenk">
+    <meta name="author" content="Martin Dhenu">
+    <title>{% block title %}Das perfekte Geschenk{% endblock %}</title>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         {{ render(controller("App\\Controller\\NavigationController::navigation")) }}
+    </div>
+
+    <div class="container mt-5">
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <div class="col-12 col-md">
+                    <small class="d-block mb-3 text-muted"> <img class="mb-2 mr-2" src="/build/images/gift-primary.png" alt="" width="24" height="24"> &copy; 2020 - Das perfekte Geschenk</small>
+                </div>
+            </div>
+        </footer>
+    </div>
+    {% block javascripts %}{% endblock %}
+</body>
 </html>
+

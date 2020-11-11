@@ -1,0 +1,24 @@
+
+.col-width {
+  &-10 {
+    width: 10%
+  }
+  &-25 {
+    width: 25%
+  }
+  &-33 {
+    width: 33%
+  }
+  &-50 {
+    width: 10%
+  }
+  &-75 {
+    width: 10%
+  }
+}
+
+.table .thead-dark th {
+  color: #fff;
+  background-color: $secondary;
+  border-color: $secondary;
+}

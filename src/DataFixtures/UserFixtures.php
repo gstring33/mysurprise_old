@@ -29,7 +29,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user = new User();
             $firstname = $this->faker->firstName;
             $lastname = $this->faker->lastName;
-
             $user->setFirstname($firstname)
                 ->setLastname($lastname)
                 ->setRoles([])
@@ -38,7 +37,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setUsername(lcfirst($firstname) . "." . lcfirst($lastname))
                 ->setGiftsList( ($this->getReference(GiftListFixtures::REF_GIFT_LIST . $i)))
                 ->setIsAllowedToSelectUser(0)
-                ->setHash(md5($firstname . "." . $lastname));
+                ->setHash(md5($firstname . "." . $lastname))
+                ->setImage("/build/images/profil-" . $i . ".png");
 
             $manager->persist($user);
         }
@@ -52,7 +52,9 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setUsername('martin.dhenu')
             ->setGiftsList( ($this->getReference(GiftListFixtures::REF_GIFT_LIST . "3")))
             ->setIsAllowedToSelectUser(0)
-            ->setHash(md5("Martin.Dhenu"));
+            ->setHash(md5("Martin.Dhenu"))
+            ->setImage("/build/images/profil-4.png");
+
         $manager->persist($super_admin);
 
         $manager->flush();

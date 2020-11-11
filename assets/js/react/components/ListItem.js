@@ -9,31 +9,34 @@ class ListItem extends Component {
     }
 
     handleRemoveItem(event) {
+        event.preventDefault();
         const ItemId = event.target.dataset.id
         this.props.handleRemoveItem(ItemId)
     }
 
     render() {
-        return <table>
-            <thead>
+        return (
+            <table className="table">
+                <thead className="thead-dark">
                 <tr>
-                    <th>title</th>
-                    <th>Description</th>
-                    <th>link</th>
-                    <th>Actions</th>
+                    <th scope="col" className="col-width-25">Titel</th>
+                    <th scope="col" className="col-width-70">Beschreibung</th>
+                    <th scope="col" className="col-width-25">Link</th>
+                    <th scope="col"className="col-width-10">Aktion</th>
                 </tr>
-            </thead>
-            <tbody>
-            {this.props.listItems.map((item) =>(
-                <tr key={'item-' + item.id}>
-                    <td>{item.title}</td>
-                    <td>{item.description}</td>
-                    <td>{item.link}</td>
-                    <td><button type="button" data-id={item.id} onClick={this.handleRemoveItem}>X</button></td>
-                </tr>
-            ))}
-            </tbody>
-        </table>;
+                </thead>
+                <tbody>
+                {this.props.listItems.map((item) =>(
+                    <tr key={'item-' + item.id}>
+                        <td>{item.title}</td>
+                        <td>{item.description}</td>
+                        <td>{item.link}</td>
+                        <td><i className="fa fa-trash" aria-hidden="true" data-id={item.id} onClick={this.handleRemoveItem}></i></td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        );
     }
 }
 

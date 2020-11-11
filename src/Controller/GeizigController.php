@@ -6,7 +6,6 @@ use App\Repository\UserRepository;
 use App\Service\ListManager;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -34,14 +33,18 @@ class GeizigController extends AbstractController
      */
     public function index(): Response
     {
+        $list = $this->getUser()->getGiftsList()->getGifts();
+
         return $this->render('geizig/index.html.twig',[
             'page' => 'Homepage',
-            "hasAlreadySelectedUser" => $this->userService->hasAlreadySelectedUser()
+            "hasAlreadySelectedUser" => $this->userService->hasAlreadySelectedUser(),
+            "totalGifts" => count($list),
+            "list" => $list
         ]);
     }
 
     /**
-     * @Route("jemanden-auswählen", name="app_select_someone")
+     * @Route("partner-ziehen", name="app_select_someone")
      * @return Response
      */
     public function selectSomeone()
@@ -55,13 +58,13 @@ class GeizigController extends AbstractController
     }
 
     /**
-     * @Route("liste-handeln", name="app_manage_liste")
+     * @Route("liste-bearbeiten", name="app_manage_liste")
      * @return Response
      */
     public function manageList()
     {
         return $this->render('geizig/manage_list.html.twig', [
-            'page' => 'Liste manager'
+            'page' => 'Liste bearbeiten'
         ]);
     }
 
