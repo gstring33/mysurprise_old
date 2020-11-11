@@ -6,7 +6,6 @@ use App\Repository\UserRepository;
 use App\Service\ListManager;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -45,7 +44,7 @@ class GeizigController extends AbstractController
     }
 
     /**
-     * @Route("jemanden-auswählen", name="app_select_someone")
+     * @Route("partner-ziehen", name="app_select_someone")
      * @return Response
      */
     public function selectSomeone()
@@ -59,7 +58,7 @@ class GeizigController extends AbstractController
     }
 
     /**
-     * @Route("liste-handeln", name="app_manage_liste")
+     * @Route("liste-bearbeiten", name="app_manage_liste")
      * @return Response
      */
     public function manageList()
