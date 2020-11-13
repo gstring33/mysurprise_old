@@ -40,7 +40,6 @@ class UserAdminCreateCommand extends Command
 
         $list = new GiftsList();
         $list->setIsPublished(0);
-        $this->addReference(self::REF_GIFT_LIST . $i, $list);
         $this->em->persist($list);
 
         $super_admin = new User();
@@ -50,7 +49,7 @@ class UserAdminCreateCommand extends Command
             ->setLastname($lastname)
             ->setRoles(['ROLE_SUPER_ADMIN'])
             ->setIsSelected(false)
-            ->setPassword($this->encoder->encodePassword($super_admin, '12345'))
+            ->setPassword('12345')
             ->setUsername(lcfirst($firstname) . '.' . lcfirst($lastname))
             ->setGiftsList($list)
             ->setIsAllowedToSelectUser(0)
