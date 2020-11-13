@@ -38,6 +38,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setGiftsList( ($this->getReference(GiftListFixtures::REF_GIFT_LIST . $i)))
                 ->setIsAllowedToSelectUser(0)
                 ->setHash(md5($firstname . "." . $lastname))
+                ->setEmail(lcfirst($firstname) . "." . lcfirst($lastname) . "@test.com")
                 ->setImage("/build/images/profil-" . $i . ".png");
 
             $manager->persist($user);
@@ -53,6 +54,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setGiftsList( ($this->getReference(GiftListFixtures::REF_GIFT_LIST . "3")))
             ->setIsAllowedToSelectUser(0)
             ->setHash(md5("Martin.Dhenu"))
+            ->setEmail("martindhenu@yahoo.fr")
             ->setImage("/build/images/profil-4.png");
 
         $manager->persist($super_admin);
