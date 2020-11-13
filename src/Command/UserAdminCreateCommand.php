@@ -21,11 +21,12 @@ class UserAdminCreateCommand extends Command
 
     /**
      * UserAdminCreateCommand constructor.
+     * @param $name
      * @param EntityManager $em
      */
-    public function __construct(EntityManager $em)
+    public function __construct($name, EntityManager $em)
     {
-        parent::__construct();
+        parent::__construct($name);
         $this->em = $em;
     }
 
