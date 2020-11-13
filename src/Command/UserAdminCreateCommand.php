@@ -11,21 +11,26 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserAdminCreateCommand extends Command
 {
     protected static $defaultName = 'app:create-user-admin';
     /**@var EntityManagerInterface */
     private $em;
+    /**@var UserPasswordEncoderInterface */
+    private $encoder;
 
     /**
      * UserAdminCreateCommand constructor.
      * @param EntityManagerInterface $em
+     * @param UserPasswordEncoderInterface $encoder
      */
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $encoder)
     {
         parent::__construct();
         $this->em = $em;
+        $this->encoder = $encoder;
     }
 
     protected function configure()
@@ -40,7 +45,6 @@ class UserAdminCreateCommand extends Command
 
         $list = new GiftsList();
         $list->setIsPublished(0);
-        $this->addReference(self::REF_GIFT_LIST . $i, $list);
         $this->em->persist($list);
 
         $super_admin = new User();
@@ -54,7 +58,7 @@ class UserAdminCreateCommand extends Command
             ->setUsername(lcfirst($firstname) . '.' . lcfirst($lastname))
             ->setGiftsList($list)
             ->setIsAllowedToSelectUser(0)
-            ->setHash(md5("Martin.Dhenu"))
+            ->setHash(md5($firstname . "." . $lastname))
             ->setImage("/build/images/martin.png");
 
         $this->em->persist($super_admin);

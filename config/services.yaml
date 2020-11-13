@@ -40,6 +40,6 @@ services:
 
     app.create_user_admin:
         class: App\Command\UserAdminCreateCommand
-        arguments: ['@doctrine.orm.entity_manager']
+        arguments: ['@doctrine.orm.entity_manager', '@security.user_password_encoder.generic']
         tags:
             - { name: console.command }
