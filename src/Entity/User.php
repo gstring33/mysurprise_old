@@ -79,6 +79,11 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFirstConnection;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -280,6 +285,18 @@ class User implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getIsFirstConnection(): ?bool
+    {
+        return $this->isFirstConnection;
+    }
+
+    public function setIsFirstConnection(bool $isFirstConnection): self
+    {
+        $this->isFirstConnection = $isFirstConnection;
 
         return $this;
     }
