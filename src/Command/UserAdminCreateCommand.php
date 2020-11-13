@@ -2,10 +2,9 @@
 
 namespace App\Command;
 
-use App\DataFixtures\GiftListFixtures;
 use App\Entity\GiftsList;
 use App\Entity\User;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,17 +15,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class UserAdminCreateCommand extends Command
 {
     protected static $defaultName = 'app:create-user-admin';
-    /**@var EntityManager */
+    /**@var EntityManagerInterface */
     private $em;
 
     /**
      * UserAdminCreateCommand constructor.
-     * @param $name
-     * @param EntityManager $em
+     * @param EntityManagerInterface $em
      */
-    public function __construct($name, EntityManager $em)
+    public function __construct(EntityManagerInterface $em)
     {
-        parent::__construct($name);
+        parent::__construct();
         $this->em = $em;
     }
 

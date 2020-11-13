@@ -40,5 +40,6 @@ services:
 
     app.create_user_admin:
         class: App\Command\UserAdminCreateCommand
+        arguments: ['@doctrine.orm.entity_manager']
         tags:
             - { name: console.command }
