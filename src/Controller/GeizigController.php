@@ -33,6 +33,14 @@ class GeizigController extends AbstractController
      */
     public function index(): Response
     {
+        $user = $this->getUser();
+        if($user->getIsFirstConnection()) {
+            $em = $this->getDoctrine()->getManager();
+            $user->setIsFirstConnection(0);
+            $em->persist($user);
+            $em->flush();
+        }
+
         $list = $this->getUser()->getGiftsList()->getGifts();
 
         return $this->render('geizig/index.html.twig',[
