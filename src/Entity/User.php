@@ -277,11 +277,17 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -289,11 +295,17 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function getIsFirstConnection(): ?bool
     {
         return $this->isFirstConnection;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function setIsFirstConnection(bool $isFirstConnection): self
     {
         $this->isFirstConnection = $isFirstConnection;

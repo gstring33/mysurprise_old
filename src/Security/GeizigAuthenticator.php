@@ -96,6 +96,10 @@ class GeizigAuthenticator extends AbstractFormLoginAuthenticator implements Pass
             return new RedirectResponse($targetPath);
         }
 
+        if($token->getUser()->getIsFirstConnection()) {
+            return new RedirectResponse($this->urlGenerator->generate('app_forgot_password_request'));
+        }
+
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
