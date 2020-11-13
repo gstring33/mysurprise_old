@@ -39,6 +39,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setIsAllowedToSelectUser(0)
                 ->setHash(md5($firstname . "." . $lastname))
                 ->setEmail(lcfirst($firstname) . "." . lcfirst($lastname) . "@test.com")
+                ->setIsFirstConnection(1)
                 ->setImage("/build/images/profil-" . $i . ".png");
 
             $manager->persist($user);
@@ -55,6 +56,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setIsAllowedToSelectUser(0)
             ->setHash(md5("Martin.Dhenu"))
             ->setEmail("martindhenu@yahoo.fr")
+            ->setIsFirstConnection(0)
             ->setImage("/build/images/profil-4.png");
 
         $manager->persist($super_admin);
