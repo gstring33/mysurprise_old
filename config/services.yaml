@@ -37,3 +37,8 @@ services:
     App\EventListener\ListUnpublisher:
         tags:
             - { name: doctrine.event_listener, event: postRemove }
+
+    app.create_user_admin:
+        class: App\Command\UserAdminCreateCommand
+        tags:
+            - { name: console.command }

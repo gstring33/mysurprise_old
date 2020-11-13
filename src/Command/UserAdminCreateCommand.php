@@ -15,7 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class UserAdminCreateCommand extends Command
 {
-    protected static $defaultName = 'app:user-admin-create';
+    protected static $defaultName = 'app:create-user-admin';
     /**@var EntityManager */
     private $em;
 
