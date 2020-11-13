@@ -32,7 +32,8 @@ class UserAdminCreateCommand extends Command
 
     protected function configure()
     {
-        $this->setDescription('Create a user Admin');
+        $this->setName('app:create-user-admin')
+            ->setDescription('Create a user Admin');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
