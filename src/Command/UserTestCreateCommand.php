@@ -35,7 +35,7 @@ class UserTestCreateCommand extends Command
 
     protected function configure()
     {
-        $this->setName('app:create-user-admin')
+        $this->setName('app:create-user-test')
             ->setDescription('Create a user Admin');
     }
 
