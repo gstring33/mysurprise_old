@@ -74,6 +74,16 @@ class User implements UserInterface
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFirstConnection;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -263,6 +273,42 @@ class User implements UserInterface
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getIsFirstConnection(): ?bool
+    {
+        return $this->isFirstConnection;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function setIsFirstConnection(bool $isFirstConnection): self
+    {
+        $this->isFirstConnection = $isFirstConnection;
 
         return $this;
     }

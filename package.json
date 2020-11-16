@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.12.1",
-        "@babel/plugin-transform-runtime": "^7.12.1"
+        "@babel/plugin-transform-runtime": "^7.12.1",
+        "dotenv": "^8.2.0"
     }
 }

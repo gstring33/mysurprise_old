@@ -43,3 +43,9 @@ services:
         arguments: ['@doctrine.orm.entity_manager', '@security.user_password_encoder.generic']
         tags:
             - { name: console.command }
+
+    app.create_user_test:
+        class: App\Command\UserTestCreateCommand
+        arguments: ['@doctrine.orm.entity_manager', '@security.user_password_encoder.generic']
+        tags:
+            - { name: console.command }

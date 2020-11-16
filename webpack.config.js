@@ -1,5 +1,6 @@
 var Encore = require('@symfony/webpack-encore');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var dotenv = require('dotenv')
 
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
@@ -9,6 +10,16 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore
+    .configureDefinePlugin(options => {
+        const env = dotenv.config();
+
+        if (env.error) {
+            throw env.error;
+        }
+
+        let localHost = (Encore.isProduction()) ? "http://dpg.martin-dh.com" : "http://localhost:8080";
+        options['process.env'].LOCAL_HOST = JSON.stringify(localHost);
+    })
     .configureFilenames({
         fonts: 'fonts/[name].[ext]'
     })
