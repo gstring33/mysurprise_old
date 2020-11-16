@@ -3,20 +3,26 @@
 {% block title %}Reset your password{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-    <h1>Reset your password</h1>
-
-    {{ form_start(requestForm) }}
-        {{ form_row(requestForm.username) }}
-        <div>
-            <small>
-                Enter your email address and we we will send you a
-                link to reset your password.
-            </small>
+    <div class="row">
+        {% for flashError in app.flashes('reset_password_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+        <div class="col-md-12">
+            <h1>Hallo {{ app.user.firstname }} ! </h1>
+            <h2>Willkommen bei "Das perfekte Geschenk"</h2>
+            <p>Bald kannst du deinen Wunschzettel erstellen und die Person ziehen, die dein Geschenk erhalten wird. Aber zuerst musst du dein Passwort zurücksetzen. Gib deine E-Mail-Adresse ein, um den Link zum Ändern deines Passworts zu erhalten.</p>
         </div>
-
-        <button class="btn btn-primary">Send password reset email</button>
-    {{ form_end(requestForm) }}
+        <div class="col-md-12 mt-5">
+            <h3 class="title-secondary">Passwort zurücksetzen</h3>
+            <form>
+                <div class="form-group">
+                    <label for="reset_password_request_form_username" class="required"></label>
+                    <input class="form-control" placeholder="ex: hans.müller@t-online.de" type="email" id="reset_password_request_form_username" name="reset_password_request_form[username]" required="required">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary">Send password reset email</button>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

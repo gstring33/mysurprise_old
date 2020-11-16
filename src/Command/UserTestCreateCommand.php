@@ -13,9 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserAdminCreateCommand extends Command
+class UserTestCreateCommand extends Command
 {
-    protected static $defaultName = 'app:create-user-admin';
+    protected static $defaultName = 'app:create-user-test';
     /**@var EntityManagerInterface */
     private $em;
     /**@var UserPasswordEncoderInterface */
@@ -47,23 +47,23 @@ class UserAdminCreateCommand extends Command
         $list->setIsPublished(0);
         $this->em->persist($list);
 
-        $super_admin = new User();
-        $firstname = 'Martin';
-        $lastname = 'Dhenu';
-        $super_admin->setFirstname($firstname)
+        $userTest = new User();
+        $firstname = 'Quentin';
+        $lastname = 'Tarantino';
+        $userTest->setFirstname($firstname)
             ->setLastname($lastname)
             ->setRoles(['ROLE_SUPER_ADMIN'])
             ->setIsSelected(false)
-            ->setPassword($this->encoder->encodePassword($super_admin, '12345'))
+            ->setPassword($this->encoder->encodePassword($userTest, '12345'))
             ->setUsername(lcfirst($firstname) . '.' . lcfirst($lastname))
             ->setGiftsList($list)
             ->setIsAllowedToSelectUser(0)
             ->setHash(md5($firstname . "." . $lastname))
             ->setEmail(lcfirst($firstname) . "." . lcfirst($lastname) ."@gmail.com")
-            ->setIsFirstConnection(0)
+            ->setIsFirstConnection(1)
             ->setImage("/build/images/martin.png");
 
-        $this->em->persist($super_admin);
+        $this->em->persist($userTest);
 
         $this->em->flush();
 

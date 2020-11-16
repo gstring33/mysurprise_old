@@ -3,7 +3,9 @@ import React, {Component} from 'react';
 class Selector extends Component {
     constructor(props) {
         super(props);
-        this.host = "http://localhost:8080";
+
+        this.host = process.env.LOCAL_HOST;
+
         this.handleOnSelect = this.handleOnSelect.bind(this)
 
         this.state = {selection: null}

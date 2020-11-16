@@ -8,7 +8,7 @@ class ListCreator extends Component {
     {
         super(props);
 
-        this.host = "http://localhost:8080";
+        this.host = process.env.LOCAL_HOST;
 
         this.state = {
             items: [],
