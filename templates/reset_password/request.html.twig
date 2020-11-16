@@ -14,14 +14,16 @@
         </div>
         <div class="col-md-12 mt-5">
             <h3 class="title-secondary">Passwort zurücksetzen</h3>
-            <form>
-                <div class="form-group">
-                    <label for="reset_password_request_form_username" class="required"></label>
-                    <input class="form-control" placeholder="ex: hans.mueller" type="text" id="reset_password_request_form_username" name="reset_password_request_form[username]" required="required">
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary">Send password reset email</button>
-                </div>
+            <form name="reset_password_request_form" method="POST">
+                {{ form_start(requestForm) }}
+                        <div class="form-group">
+                            <label for="reset_password_request_form_username" class="required">Deine Email</label>
+                            {{ form_row(requestForm.username) }}
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Send password reset email</button>
+                        </div>
+                {{ form_end(requestForm) }}
             </form>
         </div>
     </div>
