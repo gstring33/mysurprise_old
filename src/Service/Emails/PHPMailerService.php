@@ -101,6 +101,7 @@ class PHPMailerService
      * @param string|null $cc
      * @param string|null $bcc
      * @return PHPMailerService
+     * @return PHPMailer
      */
     private function initRecipient(string $from, string $name, array $adresses, ?string $replyTo = null, ?string $cc = null, ?string $bcc =null)
     {
@@ -158,5 +159,6 @@ class PHPMailerService
         }
 
         return $this;
+        return $this->mailer;
     }
 }

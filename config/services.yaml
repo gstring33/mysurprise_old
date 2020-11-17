@@ -4,6 +4,13 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    mailer_from: 'Das perfekte Geschenk'
+    mailer_host: '%env(MAILER_HOST)%'
+    mailer_port: '%env(MAILER_PORT)%'
+    mailer_username: '%env(MAILER_USERNAME)%'
+    mailer_password: '%env(MAILER_PASSWORD)%'
+    mailer_debug_mode: '%env(MAILER_DEBUG_MODE)%'
+    admin_mail: '%env(ADMIN_MAIL)%'
 
 services:
     # default configuration for services in *this* file
@@ -30,6 +37,16 @@ services:
         resource: '../src/Controller/Api'
         tags: ['controller.service_arguments']
 
+    # Services
+    App\Service\Emails\PHPMailerService:
+        arguments:
+            $from: '%mailer_from%'
+            $host: '%mailer_host%'
+            $port: '%mailer_port%'
+            $username: '%mailer_username%'
+            $password: '%mailer_password%'
+            $debug_mode: '%mailer_debug_mode%'
+
     # Event Listeners
     App\EventListener\ListPublisher:
         tags:
@@ -38,6 +55,7 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postRemove }
 
+    # Commands
     app.create_user_admin:
         class: App\Command\UserAdminCreateCommand
         arguments: ['@doctrine.orm.entity_manager', '@security.user_password_encoder.generic']
@@ -49,3 +67,4 @@ services:
         arguments: ['@doctrine.orm.entity_manager', '@security.user_password_encoder.generic']
         tags:
             - { name: console.command }
+
