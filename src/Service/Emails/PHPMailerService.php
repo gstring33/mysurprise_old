@@ -10,20 +10,17 @@ class PHPMailerService
 {
     /** @var PHPMailer */
     private $mailer;
-
     /** @var string */
     private $from;
     /** @var string */
     private $host;
-    /** @var string */
+    /** @var int */
     private $port;
     /** @var string */
     private $username;
     /** @var string */
     private $password;
-    /**
-     * @var int
-     */
+    /** @var int */
     private $debug_mode;
 
     /**
@@ -40,9 +37,9 @@ class PHPMailerService
         $this->mailer= new PHPMailer();
         $this->from = $from;
         $this->host = $host;
-        $this->port = $port;
+        $this->port = intval($port);
         $this->username = $username;
-        $this->password = $password;
+        $this->password = base64_decode($password);
         $this->debug_mode = $debug_mode;
     }
 
@@ -101,7 +98,6 @@ class PHPMailerService
      * @param string|null $cc
      * @param string|null $bcc
      * @return PHPMailerService
-     * @return PHPMailer
      */
     private function initRecipient(string $from, string $name, array $adresses, ?string $replyTo = null, ?string $cc = null, ?string $bcc =null)
     {
@@ -139,13 +135,13 @@ class PHPMailerService
             echo "Message could not be sent. Mailer Error: {$this->mailer->ErrorInfo}";
         }
 
-        return $this->mailer;
+        return $this;
     }
 
     /**
      * @param string $subject
      * @param string $html
-     * @return PHPMailer
+     * @return PHPMailerService
      */
     private function initContent(string $subject, string $html)
     {
@@ -159,6 +155,5 @@ class PHPMailerService
         }
 
         return $this;
-        return $this->mailer;
     }
 }
