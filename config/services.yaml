@@ -9,6 +9,7 @@ parameters:
     mailer_port: '%env(MAILER_PORT)%'
     mailer_username: '%env(MAILER_USERNAME)%'
     mailer_password: '%env(MAILER_PASSWORD)%'
+    mailer_debug_mode: '%env(MAILER_DEBUG_MODE)%'
     admin_mail: '%env(ADMIN_MAIL)%'
 
 services:
@@ -37,13 +38,14 @@ services:
         tags: ['controller.service_arguments']
 
     # Services
-    App\Service\Emails\ResetPasswordMailerService:
+    App\Service\Emails\PHPMailerService:
         arguments:
             $from: '%mailer_from%'
             $host: '%mailer_host%'
             $port: '%mailer_port%'
             $username: '%mailer_username%'
             $password: '%mailer_password%'
+            $debug_mode: '%mailer_debug_mode%'
 
     # Event Listeners
     App\EventListener\ListPublisher:

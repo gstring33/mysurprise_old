@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\Emails\ResetPasswordMailerService;
+use App\Service\Emails\PHPMailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -10,16 +10,16 @@ class DevController extends AbstractController
 {
     /**
      * @Route("/dev/send-email", name="dev")
-     * @param ResetPasswordMailerService $mailerService
+     * @param PHPMailerService $mailerService
      */
-    public function sendEmail(ResetPasswordMailerService $mailerService): bool
+    public function sendEmail(PHPMailerService $mailerService): bool
     {
         $response = $mailerService->send(
-            $this->getParameter('admin_mail'),
-            'John Doe',
+            [[$this->getParameter('admin_mail'), 'Martin Dhenu']],
+            'Reset Password',
             'This is a email test '
         );
 
-        var_dump($response); die();
+        die();
     }
 }
