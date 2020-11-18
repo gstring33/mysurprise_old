@@ -4,6 +4,6 @@
 
 <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">Dein Passwort zurücksetzen</a>
 
-<p>Dieser Link läuft in {{{ tokenLifetime|date('g') }}} Stunde(n) ab.</p>
+<p>Dieser Link läuft in {{ tokenLifetime|date('g') }} Stunde(n) ab.</p>
 
 <p>Beste Grüße !</p>
