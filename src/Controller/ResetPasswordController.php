@@ -78,6 +78,10 @@ class ResetPasswordController extends AbstractController
      * Validates and process the reset URL that the user clicked in their email.
      *
      * @Route("/reset/{token}", name="app_reset_password")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param string|null $token
+     * @return Response
      */
     public function reset(Request $request, UserPasswordEncoderInterface $passwordEncoder, string $token = null): Response
     {
@@ -133,10 +137,15 @@ class ResetPasswordController extends AbstractController
         ]);
     }
 
-    private function processSendingPasswordResetEmail(string $emailFormData, PHPMailerService $mailerService): RedirectResponse
+    /**
+     * @param string $usernameFormData
+     * @param PHPMailerService $mailerService
+     * @return RedirectResponse
+     */
+    private function processSendingPasswordResetEmail(string $usernameFormData, PHPMailerService $mailerService): RedirectResponse
     {
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy([
-            'username' => $emailFormData,
+            'username' => $usernameFormData,
         ]);
 
         // Marks that you are allowed to see the app_check_email page.
