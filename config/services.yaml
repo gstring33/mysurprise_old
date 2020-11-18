@@ -7,7 +7,7 @@ parameters:
     mailer_from: '%env(MAILER_FROM)%'
     mailer_host: '%env(MAILER_HOST)%'
     mailer_port: '%env(MAILER_PORT)%'
-    mailer_username: '%env(HOST_USERNAME)%'
+    mailer_username: '%env(MAILER_USERNAME)%'
     mailer_password: '%env(base64:MAILER_PASSWORD)%'
     mailer_debug_mode: '%env(MAILER_DEBUG_MODE)%'
     admin_mail: '%env(ADMIN_MAIL)%'
