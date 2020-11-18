@@ -5,6 +5,7 @@ namespace App\Service\Emails;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use Psr\Log\LoggerInterface;
 
 class PHPMailerService
 {
@@ -22,6 +23,8 @@ class PHPMailerService
     private $password;
     /** @var int */
     private $debug_mode;
+    /** @var LoggerInterface */
+    private $logger;
 
     /**
      * MailerService constructor.
@@ -31,8 +34,17 @@ class PHPMailerService
      * @param string $username
      * @param string $password
      * @param int $debug_mode
+     * @param LoggerInterface $logger
      */
-    public function __construct(string $from, string $host, string $port, string $username, string $password, int $debug_mode = 0)
+    public function __construct
+    (
+        string $from,
+        string $host,
+        string $port,
+        string $username,
+        string $password,
+        int $debug_mode = 0,
+        LoggerInterface $logger )
     {
         $this->mailer= new PHPMailer();
         $this->from = $from;
@@ -41,6 +53,7 @@ class PHPMailerService
         $this->username = $username;
         $this->password = base64_decode($password);
         $this->debug_mode = $debug_mode;
+        $this->logger = $logger;
     }
 
     /**
@@ -56,9 +69,9 @@ class PHPMailerService
             ->initContent($subject, $body);
 
         try {
-            var_dump($this->mailer->send());
+            $this->mailer->send();
         }catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$this->mailer->ErrorInfo}";
+            $this->logger->error("Email could not be sent. Subject: {$subject} Mailer Error: {$this->mailer->ErrorInfo}");
         }
     }
 
@@ -84,7 +97,7 @@ class PHPMailerService
             $this->mailer->Port       = $port;
 
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$this->mailer->ErrorInfo}";
+            $this->logger->error("Email could not be sent. Subject: {$subject} Mailer Error: {$this->mailer->ErrorInfo}");
         }
 
         return $this;
@@ -116,7 +129,7 @@ class PHPMailerService
                 $this->mailer->addBCC('bcc@example.com');
             }
         }catch (Exception $e ) {
-            echo "Message could not be sent. Mailer Error: {$this->mailer->ErrorInfo}";
+            $this->logger->error("Email could not be sent. Mailer Error: {$this->mailer->ErrorInfo}");
         }
 
         return $this;
@@ -132,7 +145,7 @@ class PHPMailerService
                 $this->mailer->addAttachment($attachment['path'], $attachment['name']);         // Add attachments
             }
         }catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$this->mailer->ErrorInfo}";
+            $this->logger->error("Email could not be sent. Mailer Error: {$this->mailer->ErrorInfo}");
         }
 
         return $this;
@@ -151,7 +164,7 @@ class PHPMailerService
             $this->mailer->Body    = $html;
             //$this->mailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
         }catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$this->mailer->ErrorInfo}";
+            $this->logger->error("Email could not be sent. Subject: {$subject} Mailer Error: {$this->mailer->ErrorInfo}");
         }
 
         return $this;

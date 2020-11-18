@@ -46,6 +46,7 @@ services:
             $username: '%mailer_username%'
             $password: '%mailer_password%'
             $debug_mode: '%mailer_debug_mode%'
+            $logger: '@logger'
 
     # Event Listeners
     App\EventListener\ListPublisher:
