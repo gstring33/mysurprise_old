@@ -97,7 +97,7 @@ class PHPMailerService
             $this->mailer->Port       = $port;
 
         } catch (Exception $e) {
-            $this->logger->error("Email could not be sent. Subject: {$subject} Mailer Error: {$this->mailer->ErrorInfo}");
+            $this->logger->error("Email could not be sent. Subject: Mailer Error: {$this->mailer->ErrorInfo}");
         }
 
         return $this;
@@ -160,7 +160,7 @@ class PHPMailerService
     {
         try {
             $this->mailer->isHTML(true);
-            $this->mailer->Subject = $subject;
+            $this->mailer->Subject = "Das Prefekte Geschenk - " . $subject;
             $this->mailer->Body    = $html;
             //$this->mailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
         }catch (Exception $e) {

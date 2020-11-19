@@ -173,8 +173,10 @@ class ResetPasswordController extends AbstractController
 
         $mailerService->send(
             [[$user->getEmail(), $user->getFirstName() . " " . $user->getLastname()]],
-            'Reset Password',
-            $this->renderView("reset_password/email.html.twig")
+            'Passwort zurücksetzen',
+            $this->renderView("reset_password/email.html.twig", [
+                'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime()
+            ])
         );
 
         return $this->redirectToRoute('app_check_email');
