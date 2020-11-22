@@ -91,6 +91,7 @@ class PHPMailerService
             $this->mailer->isSMTP();
             $this->mailer->Host       = $host;
             $this->mailer->SMTPAuth   = true;
+            $this->mailer->CharSet    = "UTF-8";
             $this->mailer->Username   = $username;
             $this->mailer->Password   = $password;
             $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;

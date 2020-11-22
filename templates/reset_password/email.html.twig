@@ -2,7 +2,7 @@
 
 <p>Um dein Passwort zurückzusetzen, click bitte auf den folgenden Link</p>
 
-<a href="{{ url('app_reset_password', {token: csrf_token('reset_password_request_form')}) }}">Dein Passwort zurücksetzen</a>
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">Dein Passwort zurücksetzen</a>
 
 <p>Dieser Link läuft in {{ tokenLifetime|date('g') }} Stunde(n) ab.</p>
 

@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
 use App\Service\Emails\PHPMailerService;
+use App\Service\TokenValidatorService;
+use App\Service\UserService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,10 +28,18 @@ class ResetPasswordController extends AbstractController
     use ResetPasswordControllerTrait;
 
     private $resetPasswordHelper;
+    /** @var UserService */
+    private $userService;
 
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper)
+    /**
+     * ResetPasswordController constructor.
+     * @param ResetPasswordHelperInterface $resetPasswordHelper
+     * @param UserService $userService
+     */
+    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, UserService $userService)
     {
         $this->resetPasswordHelper = $resetPasswordHelper;
+        $this->userService = $userService;
     }
 
     /**
@@ -99,7 +109,8 @@ class ResetPasswordController extends AbstractController
         }
 
         try {
-            $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
+            //$user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
+            $user=$this->getUser();
         } catch (ResetPasswordExceptionInterface $e) {
             $this->addFlash('reset_password_error', sprintf(
                 'There was a problem validating your reset request - %s',
@@ -115,7 +126,8 @@ class ResetPasswordController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // A password reset token should be used only once, remove it.
-            $this->resetPasswordHelper->removeResetRequest($token);
+            //$this->resetPasswordHelper->removeResetRequest($token);
+            $this->userService->removeUserResetTokens();
 
             // Encode the plain password, and set it.
             $encodedPassword = $passwordEncoder->encodePassword(
@@ -163,10 +175,10 @@ class ResetPasswordController extends AbstractController
             // the lines below and change the redirect to 'app_forgot_password_request'.
             // Caution: This may reveal if a user is registered or not.
             //
-            // $this->addFlash('reset_password_error', sprintf(
-            //     'There was a problem handling your password reset request - %s',
-            //     $e->getReason()
-            // ));
+            $this->addFlash('reset_password_error', sprintf(
+                'There was a problem handling your password reset request - %s',
+                $e->getReason()
+            ));
 
             return $this->redirectToRoute('app_check_email');
         }
@@ -175,10 +187,12 @@ class ResetPasswordController extends AbstractController
             [[$user->getEmail(), $user->getFirstName() . " " . $user->getLastname()]],
             'Passwort zurücksetzen',
             $this->renderView("reset_password/email.html.twig", [
+                'resetToken' => $resetToken,
                 'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime()
             ])
         );
 
         return $this->redirectToRoute('app_check_email');
     }
+
 }
