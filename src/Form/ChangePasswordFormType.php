@@ -24,15 +24,22 @@ class ChangePasswordFormType extends AbstractType
                         ]),
                         new Length([
                             'min' => 6,
-                            'minMessage' => 'Your password should be at least {{ limit }} characters',
+                            'minMessage' => 'Dein Passwort sollte mindestens {{ limit }} Zeichen enthalten',
                             // max length allowed by Symfony for security reasons
                             'max' => 4096,
                         ]),
                     ],
-                    'label' => 'New password',
+                    'attr' =>[
+                        'class' => 'form-control',
+                    ],
+                    'label'=> 'Neues Passwort'
                 ],
                 'second_options' => [
-                    'label' => 'Repeat Password',
+                    'attr' =>[
+                        'class' => 'form-control',
+                        'placeholder' => 'ex: hans.mueller'
+                    ],
+                    'label'=> 'Neues Passwort wiederholen'
                 ],
                 'invalid_message' => 'The password fields must match.',
                 // Instead of being set onto the object directly,
