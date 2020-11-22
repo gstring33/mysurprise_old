@@ -87,7 +87,7 @@ class FormAddItem extends Component {
                     />
                 </div>
                 <button type="submit" className="btn btn-primary mb-2"><i className="fas fa-cart-arrow-down fa-button"></i> Wunsch hinzufügen</button>
-                <a href="/" type="button" className="btn btn-secondary mb-2 ml-3"><i className="far fa-arrow-alt-circle-left fa-button"></i> Zurück</a>
+                <a href="/" type="button" className="btn btn-secondary mb-2 ml-3"><i className="far fa-arrow-alt-circle-left fa-button"></i> Weiter</a>
             </form>;
     }
 }

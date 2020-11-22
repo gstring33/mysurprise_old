@@ -35,7 +35,7 @@ class Selector extends Component {
     render() {
         return <React.Fragment>
             {this.state.selection === null ?
-                <button className="btn btn-primary btn-lg btn-block" onClick={this.handleOnSelect}>Start ziehen</button> :
+                <button className="btn btn-primary btn-lg btn-block" onClick={this.handleOnSelect}>Ziehung starten</button> :
                 <div className="card text-center mb-4 shadow-sm">
                     <img src={this.state.selection.image} className="card-img-top rounded-circle" alt={"select-" + this.state.selection.firstname}/>
                         <div className="card-body">
