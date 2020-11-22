@@ -1,5 +1,5 @@
-<div class="col-md-8 text-center p-md-3">
-    <h3>Im Moment enthält deine Liste {{ totalGifts }} {% if totalGifts > 1 %}Wünsche{% else %}Wunsch{% endif %}</h3>
+<div class="col-md-8 p-md-3">
+    <h5>Im Moment enthält deine Liste {{ totalGifts }} {% if totalGifts > 1 %}Wünsche{% else %}Wunsch{% endif %}</h5>
     {% if totalGifts > 0 %}
         <ul class="list-group list-group-flush">
         {% for gift in list %}
@@ -7,7 +7,7 @@
         {% endfor %}
         </ul>
     {% endif %}
-    <a href="{{ url('app_manage_liste') }}" role="button" class="btn btn-lg btn-primary btn-block mt-3">
+    <a href="{{ url('app_manage_liste') }}" role="button" class="btn  btn-primary mt-3">
         <i class="fa fa-cog mr-2" aria-hidden="true"></i> Meine Liste bearbeiten
     </a>
 </div>

@@ -3,24 +3,29 @@
 {% block title %}Geizig - {{ page }}{% endblock %}
 
 {% block body %}
-    <div>
-        <h1>{{ page }}</h1>
-        <div>
-            {% if list is empty %}
-                Die Liste von {{ selectedUser.firstname }} ist im Moment Leer !!!
-            {% else %}
-                {% for gift in list %}
-                    <ul>
-                        <li>{{ gift.title }}</li>
-                        {% if  gift.description is not empty %}
-                            <li>{{ gift.description }}</li>
-                        {% endif%}
-                        {% if  gift.link is not empty %}
-                            <li>{{ gift.link }}</li>
-                        {% endif%}
-                    </ul>
-                {% endfor %}
-            {% endif %}
-        </div>
+    <div class="row">
+        <h3 class="title-secondary"><i class="far fa-smile"></i> Liste von {{ selectedUser.firstname }}</h3>
+        {% if list is empty %}
+            <p>Die Liste von {{ selectedUser.firstname }} ist im Moment Leer !!!</p>
+        {% else %}
+            <table class="table table-striped mt-5">
+                <thead>
+                <tr>
+                    <th scope="col" class="col-width-25">Title</th>
+                    <th scope="col" class="col-width-50">Description</th>
+                    <th scope="col" class="col-width-25">Link</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for gift in list %}
+                        <tr>
+                            <td>{{ gift.title }}</td>
+                            <td >{% if  gift.description is not empty %}{{ gift.description }}{% else %}-{% endif%}</td>
+                            <td>{% if  gift.link is not empty %}{{ gift.link }}{% else %}-{% endif%}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 {% endblock %}
