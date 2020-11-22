@@ -48,6 +48,10 @@ services:
             $debug_mode: '%mailer_debug_mode%'
             $logger: '@logger'
 
+    App\Service\UserService:
+        arguments:
+            $manager: '@doctrine.orm.entity_manager'
+
     # Event Listeners
     App\EventListener\ListPublisher:
         tags:

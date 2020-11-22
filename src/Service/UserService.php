@@ -15,11 +15,7 @@ class UserService
     private $user;
     /** @var ResetPasswordRequestRepository */
     private $passwordRequestRepository;
-    /** @var ResetPasswordRequest */
-    private $passwordRequest;
-    /**
-     * @var EntityManager
-     */
+    /** @var EntityManager */
     private $manager;
 
     /**
@@ -47,10 +43,9 @@ class UserService
 
     public function removeUserResetTokens()
     {
-        $tokens = $this->passwordRequestRepository->findBy(["user_id" => $this->user->getId()]);
+        $tokens = $this->passwordRequestRepository->findBy(["user" => $this->user]);
         foreach ($tokens as $token) {
             $this->manager->remove($token);
-            $this->manager->persist();
         }
         $this->manager->flush();
     }
