@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserAdminController!{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12">
+        <h3 class="title-secondary"><i class="fas fa-cart-plus"></i> Neuen Benutzer erstellen</h3>
+    </div>
+    <div class="col-sm-6 mt-5">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {{ form(form) }}
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-sm-12">
+        <h3 class="title-secondary"><i class="fas fa-users"></i> Benutzer Liste</h3>
+    </div>
+    <div class="col-sm-12 mt-5">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Roles</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">First connection</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ user.username }}</td>
+                        <td>
+                            {% for role in user.roles %}
+                                {{ role}}{% if not loop.last%} | {% endif%}
+                            {% endfor %}
+                        </td>
+                        <td>{{ user.email }}</td>
+                        <td>{% if user.isFirstConnection %}
+                                <i class="far fa-check-circle"></i>
+                            {% else %}
+                                <i class="far fa-times-circle"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

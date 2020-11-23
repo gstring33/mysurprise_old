@@ -8,14 +8,14 @@
         {% if list is empty %}
             <p>Die Liste von {{ selectedUser.firstname }} ist im Moment Leer !!!</p>
         {% else %}
-            <table class="table table-striped mt-5">
-                <thead>
-                <tr>
-                    <th scope="col" class="col-width-25">Title</th>
-                    <th scope="col" class="col-width-50">Description</th>
-                    <th scope="col" class="col-width-25">Link</th>
-                </tr>
-                </thead>
+            <table class="table mt-5">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="col-width-25">Title</th>
+                        <th scope="col" class="col-width-50">Description</th>
+                        <th scope="col" class="col-width-25">Link</th>
+                    </tr>
+                    </thead>
                 <tbody>
                     {% for gift in list %}
                         <tr>
