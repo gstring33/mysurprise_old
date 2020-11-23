@@ -8,5 +8,8 @@
     {% if app.user.isAllowedToSelectUser %}
         <a class="p-2 text-dark" href="{{ url('app_select_someone') }}">Jemanden ziehen</a>
     {% endif %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <a class="p-2 text-dark" href="{{ url('app_user_admin') }}">Users</a>
+    {% endif %}
 </nav>
 <a class="btn btn-danger nav-logout" role="button" aria-pressed="true" href="{{ url('app_logout') }}">Logout</a>
