@@ -6,6 +6,7 @@ use App\Entity\GiftsList;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
+use App\Service\Emails\PHPMailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,9 +31,14 @@ class UserAdminController extends AbstractController
      * @Route("/user/admin", name="app_user_admin")
      * @param Request $request
      * @param UserPasswordEncoderInterface $encoder
+     * @param PHPMailerService $mailerService
      * @return Response
      */
-    public function index(Request $request, UserPasswordEncoderInterface $encoder): Response
+    public function index(
+        Request $request,
+        UserPasswordEncoderInterface $encoder,
+        PHPMailerService $mailerService
+    ): Response
     {
         $user = new User();
         $user->setRoles(['ROLE_USER'])
@@ -67,6 +73,15 @@ class UserAdminController extends AbstractController
                 ->setGiftsList($giftList);
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $mailerService->send(
+                [[$user->getEmail(), $user->getFirstName() . " " . $user->getLastname()]],
+                'Dein Konto ist erstellt!',
+                $this->renderView("user_admin/email_user.html.twig", [
+                    'user' => $user,
+                    'password' => $password
+                ])
+            );
 
             $this->addFlash('success', 'Benutzer erfolgreich erstellt!');
 
