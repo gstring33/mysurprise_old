@@ -27,4 +27,8 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
+###> users builder ###
+/assets/images/users/*
+###< users builder ###
+
 /local
