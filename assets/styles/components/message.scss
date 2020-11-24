@@ -1,0 +1,15 @@
+.message {
+  padding: 1em;
+  border-radius: 3px;
+  margin: 10px 0px;
+
+  &-right {
+    background-color: #efefef;
+    border: 1px solid #d0d0d0;
+  }
+
+  &-link {
+    border: 1px solid #977535;
+    background-color: #bc974f;
+  }
+}

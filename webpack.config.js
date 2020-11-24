@@ -96,8 +96,6 @@ Encore
     // requires WebpackEncoreBundle 1.4 or higher
     //.enableIntegrityHashes(Encore.isProduction())
 
-    .autoProvidejQuery()
-
     // uncomment if you use API Platform Admin (composer req api-admin)
     .enableReactPreset()
     //.addEntry('admin', './assets/admin.js')
