@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\TachtRoom;
+use App\Entity\TchatRoom;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method TachtRoom|null find($id, $lockMode = null, $lockVersion = null)
- * @method TachtRoom|null findOneBy(array $criteria, array $orderBy = null)
- * @method TachtRoom[]    findAll()
- * @method TachtRoom[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method TchatRoom|null find($id, $lockMode = null, $lockVersion = null)
+ * @method TchatRoom|null findOneBy(array $criteria, array $orderBy = null)
+ * @method TchatRoom[]    findAll()
+ * @method TchatRoom[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TachtRoomRepository extends ServiceEntityRepository
+class TchatRoomRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TachtRoom::class);
+        parent::__construct($registry, TchatRoom::class);
     }
 
     // /**
-    //  * @return TachtRoom[] Returns an array of TachtRoom objects
+    //  * @return TchatRoom[] Returns an array of TchatRoom objects
     //  */
     /*
     public function findByExampleField($value)

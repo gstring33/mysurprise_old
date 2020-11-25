@@ -87,7 +87,7 @@ class User implements UserInterface
     private $isFirstConnection;
 
     /**
-     * @ORM\OneToOne(targetEntity=TachtRoom::class, inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=TchatRoom::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $tchatRoom;
 
@@ -330,12 +330,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTchatRoom(): ?TachtRoom
+    public function getTchatRoom(): ?TchatRoom
     {
         return $this->tchatRoom;
     }
 
-    public function setTchatRoom(?TachtRoom $tchatRoom): self
+    public function setTchatRoom(?TchatRoom $tchatRoom): self
     {
         $this->tchatRoom = $tchatRoom;
 

@@ -28,7 +28,7 @@ class Message
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity=TachtRoom::class, inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity=TchatRoom::class, inversedBy="messages")
      */
     private $tchatRoom;
 
@@ -76,12 +76,12 @@ class Message
         return $this;
     }
 
-    public function getTchatRoom(): ?TachtRoom
+    public function getTchatRoom(): ?TchatRoom
     {
         return $this->tchatRoom;
     }
 
-    public function setTchatRoom(?TachtRoom $tchatRoom): self
+    public function setTchatRoom(?TchatRoom $tchatRoom): self
     {
         $this->tchatRoom = $tchatRoom;
 

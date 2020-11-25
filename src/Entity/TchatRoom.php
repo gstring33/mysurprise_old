@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\TachtRoomRepository;
+use App\Repository\TchatRoomRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=TachtRoomRepository::class)
  */
-class TachtRoom
+class TchatRoom
 {
     /**
      * @ORM\Id
