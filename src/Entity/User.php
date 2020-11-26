@@ -329,12 +329,16 @@ class User implements UserInterface
 
         return $this;
     }
-
+    /**
+     * @see UserInterface
+     */
     public function getTchatRoom(): ?TchatRoom
     {
         return $this->tchatRoom;
     }
-
+    /**
+     * @see UserInterface
+     */
     public function setTchatRoom(?TchatRoom $tchatRoom): self
     {
         $this->tchatRoom = $tchatRoom;
