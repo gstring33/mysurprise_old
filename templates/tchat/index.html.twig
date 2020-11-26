@@ -46,18 +46,19 @@
                 </div>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordeonMessage">
                     <div class="card-body">
-                        <div class="message message-right">
-                            <h6><b>Anonymous</b>, am 10.11.2020</h6>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                        </div>
-                        <div class="message message-link">
-                            <h6><b>Du</b>, am 10.11.2020</h6>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                        </div>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMessage" data-type="guest">
-                            Eine Nachricht schreiben
-                        </button>
+                        {% if tchatGuestMessagesTotal != 0 %}
+                            {% for message in tchatGuestMessages %}
+                                <div class="message message-{% if message.type == "guest" %}left{% else %}right{% endif %}">
+                                    <h6><b>{% if message.type == "host" %}{{ selectedUser.firstname }}{% else %}Du{% endif %}</b>{#, am {{ message.date }}#}</h6>
+                                    {{ message.content }}
+                                </div>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMessage" data-type="guest">
+                                    Eine Nachricht schreiben
+                                </button>
+                            {% endfor %}
+                        {% else %}
+                            Dein Partner hat dir im Moment noch keine Nachricht geschickt.
+                        {% endif %}
                     </div>
 
                 </div>
