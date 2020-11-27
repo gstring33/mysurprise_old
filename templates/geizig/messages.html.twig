@@ -23,7 +23,7 @@
                             {% if tchatHostMessagesTotal > 0 %}
                                 {% for message in tchatHostMessages %}
                                     <div class="message message-{% if message.type == "host" %}left{% else %}right{% endif %}">
-                                        <h6><b>{% if message.type == "guest" %}{{ selectedUser.firstname }}{% else %}Du{% endif %}</b>{#, am {{ message.date }}#}</h6>
+                                        <h6><b>From: {% if message.type == "guest" %}{{ selectedUser.firstname }}{% else %}Du{% endif %}</b>, den {{ message.date|date("d.m.Y") }}</h6>
                                         {{ message.content }}
                                     </div>
                                 {% endfor %}
@@ -47,15 +47,15 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordeonMessage">
                     <div class="card-body">
                         {% if tchatGuestMessagesTotal != 0 %}
-                            {% for message in tchatGuestMessages %}
+                            {% for message in tchatGestMessages %}
                                 <div class="message message-{% if message.type == "guest" %}left{% else %}right{% endif %}">
-                                    <h6><b>{% if message.type == "host" %}{{ selectedUser.firstname }}{% else %}Du{% endif %}</b>{#, am {{ message.date }}#}</h6>
+                                    <h6>{% if message.type == "host" %}From: Anonymous{% else %}Du{% endif %}, den {{ message.date|date("d.m.Y") }}</h6>
                                     {{ message.content }}
                                 </div>
-                                <button type="button" class="btn btn-primary open-modal-send-message" data-message="guest" data-toggle="modal" data-target="#modalMessage" data-type="guest">
-                                    Eine Nachricht schreiben
-                                </button>
                             {% endfor %}
+                            <button type="button" class="btn btn-primary open-modal-send-message" data-message="guest" data-toggle="modal" data-target="#modalMessage" data-type="guest">
+                                Eine Nachricht schreiben
+                            </button>
                         {% else %}
                             Dein Partner hat dir im Moment noch keine Nachricht geschickt.
                         {% endif %}

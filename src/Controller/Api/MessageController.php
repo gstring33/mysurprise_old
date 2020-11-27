@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Message;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +21,10 @@ class MessageController extends AbstractController
     /**
      * @Route("/api/message", name="api_post_message", methods={"POST"})
      * @param Request $request
+     * @param UserRepository $userRepository
      * @return Response
      */
-    public function index(Request $request): Response
+    public function index(Request $request, UserRepository $userRepository): Response
     {
         $data= json_decode($request->getContent(), true);
         $em = $this->getDoctrine()->getManager();
@@ -41,7 +43,17 @@ class MessageController extends AbstractController
             $em->flush();
 
         }elseif ($data["type"] === self::MESSAGE_TYPE_GUEST) {
-
+            $userSelectedBy = $userRepository->findSelectedBy($currentUser);
+            $tchat = $userSelectedBy->getTchatRoom();
+            $newMessage = new Message();
+            $newMessage->setTchatRoom($tchat)
+                ->setUser($currentUser)
+                ->setType($data["type"])
+                ->setIsRead(0)
+                ->setDate(new \DateTime())
+                ->setContent($data["message"]);
+            $em->persist($newMessage);
+            $em->flush();
         }else {
             return new Response(
                 json_encode([
