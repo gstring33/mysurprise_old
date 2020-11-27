@@ -4,3 +4,42 @@ import '../styles/app.scss';
 
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
+
+// ===== TCHAT ===== //
+
+$("#modalMessageSend").on("click", function () {
+    let textarea = $("#modalMessageTextarea");
+    let message = textarea.val()
+    if (message !== "") {
+        let url = process.env.LOCAL_HOST + "/api/message";
+        fetch(url , {
+            method: "POST",
+            cache:"no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(message)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === "success") {
+                    location.reload();
+                }else {
+                    //manage error
+                }
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+    textarea.val('');
+    $("#modalMessage").modal("hide");
+})
+
+// xxxxx TCHAT xxxxx //
+
+
+
+
