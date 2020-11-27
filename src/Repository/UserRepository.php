@@ -66,10 +66,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     public function findSelectedBy($user) {
-        return $this->createQueryBuilder('u')
+        $result =  $this->createQueryBuilder('u')
             ->andWhere('u.selectedUser = :selectedUser')
             ->setParameter('selectedUser',  $user)
             ->getQuery()
-            ->getResult()[0];
+            ->getResult();
+
+        return !empty($result) ? $result[0] : $result;
     }
 }

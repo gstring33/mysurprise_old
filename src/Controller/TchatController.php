@@ -21,8 +21,9 @@ class TchatController extends AbstractController
         $tchatHostMessages = $currentUser->getTchatroom()->getMessages();
 
         //Get messages guest
-        $selectedByUser = $userRepository->findSelectedBy($currentUser);
-        $tchatGuestMesages = $selectedByUser->getTchatRoom()->getMessages();
+        $selectedByUser = $currentUser->getIsSelected() ? $userRepository->findSelectedBy($currentUser) : null;
+        $tchatGuestMesages = $currentUser->getIsSelected() ? $selectedByUser->getTchatRoom()->getMessages() : null;
+        $tchatGuestMessagesTotal = $currentUser->getIsSelected() ? count($tchatGuestMesages) : 0;
 
         $selectedUser = $currentUser->getSelectedUser();
 
@@ -31,7 +32,7 @@ class TchatController extends AbstractController
             'tchatHostMessages' => $tchatHostMessages,
             'tchatHostMessagesTotal' => count($tchatHostMessages),
             'tchatGestMessages' => $tchatGuestMesages,
-            'tchatGuestMessagesTotal' => count($tchatGuestMesages)
+            'tchatGuestMessagesTotal' => $tchatGuestMessagesTotal
         ]);
     }
 }
