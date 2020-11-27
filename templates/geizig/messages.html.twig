@@ -29,7 +29,7 @@
                                 {% endfor %}
                             {% endif %}
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMessage" data-type="host">
+                            <button type="button" class="btn btn-primary open-modal-send-message" data-message="host" data-toggle="modal" data-target="#modalMessage" data-type="host">
                                 Eine Nachricht schreiben
                             </button>
                         </div>
@@ -52,7 +52,7 @@
                                     <h6><b>{% if message.type == "host" %}{{ selectedUser.firstname }}{% else %}Du{% endif %}</b>{#, am {{ message.date }}#}</h6>
                                     {{ message.content }}
                                 </div>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMessage" data-type="guest">
+                                <button type="button" class="btn btn-primary open-modal-send-message" data-message="guest" data-toggle="modal" data-target="#modalMessage" data-type="guest">
                                     Eine Nachricht schreiben
                                 </button>
                             {% endfor %}

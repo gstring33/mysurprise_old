@@ -7,11 +7,22 @@ require('@fortawesome/fontawesome-free/js/all.js');
 
 // ===== TCHAT ===== //
 
+let textarea = $("#modalMessageTextarea");
+
+$(".open-modal-send-message").each(function(button) {
+    $(this).on("click", function() {
+        textarea.attr('data-message', $(this).data('message'));
+    })
+})
+
 $("#modalMessageSend").on("click", function () {
-    let textarea = $("#modalMessageTextarea");
     let message = textarea.val()
     if (message !== "") {
         let url = process.env.LOCAL_HOST + "/api/message";
+        let data = {
+            message: message,
+            type : textarea.data('message')
+        }
         fetch(url , {
             method: "POST",
             cache:"no-cache",
@@ -19,7 +30,7 @@ $("#modalMessageSend").on("click", function () {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(message)
+            body: JSON.stringify(data)
         })
             .then(response => response.json())
             .then(data => {
