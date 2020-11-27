@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Entity\Message;
 use App\Repository\UserRepository;
+use App\Service\MessageService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ class MessageController extends AbstractController
     const SUCCESS_STATUS = "success";
     const ERROR_STATUS = "error";
     const SUCCESS_POST_MESSAGE_ANONYMOUS  = "Deine Nachricht wurde erfolreich an %s anonymous gesendet";
-    const SUCCESS_POST_MESSAGE = "Deine Nachricht wurde erfolreich an deinen Partenr gesendet";
+    const SUCCESS_POST_MESSAGE = "Deine Nachricht wurde erfolreich an deinen Partner gesendet";
     const ERROR_POST_MESSAGE  = "Deine Nachricht konnte nicht gesendet werden";
     const MESSAGE_TYPE_HOST = "host";
     const MESSAGE_TYPE_GUEST = "guest";
@@ -25,38 +26,20 @@ class MessageController extends AbstractController
      * @param UserRepository $userRepository
      * @return Response
      */
-    public function index(Request $request, UserRepository $userRepository): Response
+    public function index(Request $request,UserRepository $userRepository, MessageService $messageService): Response
     {
         $data= json_decode($request->getContent(), true);
         $em = $this->getDoctrine()->getManager();
         $currentUser = $this->getUser();
 
         if($data["type"] === self::MESSAGE_TYPE_HOST ) {
-            $tchat = $currentUser->getTchatRoom();
-            $newMessage = new Message();
-            $newMessage->setTchatRoom($tchat)
-                ->setUser($currentUser)
-                ->setType($data["type"])
-                ->setIsRead(0)
-                ->setDate(new \DateTime())
-                ->setContent($data["message"]);
-            $em->persist($newMessage);
-            $em->flush();
+            $messageService->sendMessage($currentUser, $data["type"], $data["message"]);
             $userSelected = $currentUser->getSelectedUser()->getFirstname();
             $message = sprintf(self::SUCCESS_POST_MESSAGE_ANONYMOUS, $userSelected);
 
         }elseif ($data["type"] === self::MESSAGE_TYPE_GUEST) {
             $userSelectedBy = $userRepository->findSelectedBy($currentUser);
-            $tchat = $userSelectedBy->getTchatRoom();
-            $newMessage = new Message();
-            $newMessage->setTchatRoom($tchat)
-                ->setUser($currentUser)
-                ->setType($data["type"])
-                ->setIsRead(0)
-                ->setDate(new \DateTime())
-                ->setContent($data["message"]);
-            $em->persist($newMessage);
-            $em->flush();
+            $messageService->sendMessage($userSelectedBy, $data["type"], $data["message"]);
             $message = self::SUCCESS_POST_MESSAGE;
         }else {
             $alert = $this->renderView("partials/alert.html.twig", ["type" => "danger", "message" => self::ERROR_POST_MESSAGE]);

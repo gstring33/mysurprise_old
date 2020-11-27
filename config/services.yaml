@@ -52,6 +52,10 @@ services:
         arguments:
             $manager: '@doctrine.orm.entity_manager'
 
+    App\Service\MessageService:
+        arguments:
+            $manager: '@doctrine.orm.entity_manager'
+
     # Event Listeners
     App\EventListener\ListPublisher:
         tags:
