@@ -27,7 +27,7 @@ class TchatController extends AbstractController
 
         $selectedUser = $currentUser->getSelectedUser();
 
-        return $this->render('tchat/index.html.twig', [
+        return $this->render('geizig/messages.html.twig', [
             'selectedUser' => $selectedUser,
             'tchatHostMessages' => $tchatHostMessages,
             'tchatHostMessagesTotal' => count($tchatHostMessages),
