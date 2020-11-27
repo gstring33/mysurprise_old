@@ -35,11 +35,11 @@ $("#modalMessageSend").on("click", function () {
             .then(response => response.json())
             .then(data => {
                 if(data.status === "success") {
-                    location.reload();
-                }else {
-                    //manage error
+                    $(data.alert).insertBefore("#accordeonMessage");
+                    $('#dpg-alert').on('closed.bs.alert', function () {
+                        location.reload();
+                    })
                 }
-
             })
             .catch((error) => {
                 console.error('Error:', error);
