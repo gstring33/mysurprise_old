@@ -3,6 +3,7 @@
 
 namespace App\Service;
 
+use App\Controller\Api\MessageController;
 use App\Entity\Message;
 use App\Service\Emails\PHPMailerService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,7 +28,13 @@ class MessageService
         $this->manager = $manager;
     }
 
-    public function sendMessage($user, $type, $message) {
+    /**
+     * @param $user
+     * @param string $type
+     * @param string $message
+     */
+    public function sendMessage($user, string $type, string $message)
+    {
         $tchat = $user->getTchatRoom();
         $newMessage = new Message();
         $newMessage->setTchatRoom($tchat)
