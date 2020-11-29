@@ -35,6 +35,7 @@ class UserController extends AbstractController
      */
     public function getUserSelection(): Response
     {
+        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         if($user->getSelectedUser() !== NULL) {
             return new Response(
@@ -47,9 +48,21 @@ class UserController extends AbstractController
         }
 
         $users = $this->userRepository->findOtherUsersNotSelected($user->getId());
-        $random = rand(0, count($users)-1);
-        $userSelected = $users[$random];
-        $em = $this->getDoctrine()->getManager();
+        if(count($users) === 2) {
+            $usersNotSelected=[];
+            foreach($users as $i) {
+                $usersNotSelected[] = $i->getUsername();
+            }
+            $otherUserAllowedToSelect = $this->userRepository->findUsersNotSelected($user->getFirstname());
+            $isOtherUserNotSelected = in_array($otherUserAllowedToSelect->getUsername(), $usersNotSelected);
+            if ($isOtherUserNotSelected) {
+               $userSelected = $otherUserAllowedToSelect;
+            }
+        }else {
+            $random = rand(0, count($users)-1);
+            $userSelected = $users[$random];
+        }
+
         $userSelected->setIsSelected(1);
         $user->setSelectedUser($userSelected);
         $user->setIsAllowedToSelectUser(0);

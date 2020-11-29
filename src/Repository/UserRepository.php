@@ -74,4 +74,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         return !empty($result) ? $result[0] : $result;
     }
+
+    public function findUsersNotSelected(string $currentUserFirstname)
+    {
+        return  $this->createQueryBuilder('u')
+            ->where('u.selectedUser is null')
+            ->andWhere('u.firstname != :userFirstname')
+            ->setParameter('userFirstname', $currentUserFirstname)
+            ->getQuery()
+            ->getResult()[0];
+    }
 }
