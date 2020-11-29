@@ -19,12 +19,10 @@ class MessageService
 
     /**
      * MessageService constructor.
-     * @param PHPMailerService $mailerService
      * @param EntityManagerInterface $manager
      */
     public function __construct(PHPMailerService $mailerService, EntityManagerInterface $manager)
     {
-        $this->mailerService = $mailerService;
         $this->manager = $manager;
     }
 
@@ -33,12 +31,12 @@ class MessageService
      * @param string $type
      * @param string $message
      */
-    public function sendMessage($user, string $type, string $message)
+    public function sendMessage($from, $to, string $type, string $message)
     {
-        $tchat = $user->getTchatRoom();
+        $tchat = $type === MessageController::MESSAGE_TYPE_HOST ? $from->getTchatRoom() : $to->getTchatRoom();
         $newMessage = new Message();
         $newMessage->setTchatRoom($tchat)
-            ->setUser($user)
+            ->setUser($from)
             ->setType($type)
             ->setIsRead(0)
             ->setDate(new \DateTime())
