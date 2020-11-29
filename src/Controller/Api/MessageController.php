@@ -67,17 +67,15 @@ class MessageController extends AbstractController
         }
 
         // Send Email
-        if($this->environment === "prod") {
-            $subject = $type === MessageController::MESSAGE_TYPE_HOST ? "deinem anonymen Partner" : $sentTo->getFirstname();
-            $mailerService->send(
-                [[$sentTo->getEmail(), $sentTo->getFirstName() . " " . $sentTo->getLastname()]],
-                'Neue Nachricht von' . $subject,
-                $this->renderView("message/message_email.html.twig", [
-                    'sentTo' => $sentTo,
-                    'sentFrom' => $sentFrom
-                ])
-            );
-        }
+        $subject = $type === MessageController::MESSAGE_TYPE_HOST ? "deinem anonymen Partner" : $sentTo->getFirstname();
+        $mailerService->send(
+            [[$sentTo->getEmail(), $sentTo->getFirstName() . " " . $sentTo->getLastname()]],
+            'Neue Nachricht von' . $subject,
+            $this->renderView("message/message_email.html.twig", [
+                'sentTo' => $sentTo,
+                'sentFrom' => $sentFrom
+            ])
+        );
 
         $alert = $this->renderView("partials/alert.html.twig", ["type" => "success", "message" => $alertMessage]);
         return new Response(
