@@ -66,13 +66,13 @@ class MessageController extends AbstractController
         }
 
         // Send Email
-        $subject = $type === MessageController::MESSAGE_TYPE_HOST ? "deinem anonymen Partner" : $sentTo->getFirstname();
+        $sentFrom = $type === MessageController::MESSAGE_TYPE_HOST ? "deinem anonymen Partner" : $sentTo->getFirstname();
         $mailerService->send(
             [[$sentTo->getEmail(), $sentTo->getFirstName() . " " . $sentTo->getLastname()]],
-            'Neue Nachricht von' . $subject,
+            'Neue Nachricht von' . $sentFrom,
             $this->renderView("message/message_email.html.twig", [
                 'sentTo' => $sentTo,
-                'sentFrom' => $currentUser
+                'sentFrom' => $sentFrom
             ])
         );
 
