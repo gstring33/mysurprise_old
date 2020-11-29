@@ -40,7 +40,6 @@ class MessageController extends AbstractController
         $type = $data["type"];
         $message = $data["message"];
         $currentUser = $this->getUser();
-        $sentFrom = null;
         $sentTo = null;
 
         //Send private message
@@ -73,7 +72,7 @@ class MessageController extends AbstractController
             'Neue Nachricht von' . $subject,
             $this->renderView("message/message_email.html.twig", [
                 'sentTo' => $sentTo,
-                'sentFrom' => $sentFrom
+                'sentFrom' => $currentUser
             ])
         );
 
