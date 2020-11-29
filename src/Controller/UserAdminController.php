@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\GiftsList;
+use App\Entity\TchatRoom;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
@@ -63,6 +64,9 @@ class UserAdminController extends AbstractController
             $giftList->setIsPublished(0);
             $entityManager->persist($giftList);
 
+            $tchatroom = new TchatRoom();
+            $entityManager->persist($tchatroom);
+
             $user->setFirstname($firstname)
                 ->setLastname($lastname)
                 ->setUsername(lcfirst($firstname) . "." . lcfirst($lastname))
@@ -70,7 +74,8 @@ class UserAdminController extends AbstractController
                 ->setImage('/build/images/user/' . $form->get('image')->getData())
                 ->setHash(md5($firstname . "." . $lastname))
                 ->setEmail($form->get('email')->getData())
-                ->setGiftsList($giftList);
+                ->setGiftsList($giftList)
+                ->setTchatRoom($tchatroom);
             $entityManager->persist($user);
             $entityManager->flush();
 

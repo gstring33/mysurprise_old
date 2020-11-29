@@ -16,6 +16,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     /** @var UserPasswordEncoderInterface */
     private $encoder;
     const USER_MAX = 3;
+    const REF_USER = "User_";
 
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
@@ -40,8 +41,10 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setHash(md5($firstname . "." . $lastname))
                 ->setEmail(lcfirst($firstname) . "." . lcfirst($lastname) . "@test.com")
                 ->setIsFirstConnection(1)
-                ->setImage("/build/images/profil-" . $i . ".png");
+                ->setImage("/build/images/profil-" . $i . ".png")
+                ->setTchatRoom($this->getReference(TchatRoomFixtures::REF_TCHATROOM . $i));
 
+            $this->addReference(self::REF_USER . $i, $user);
             $manager->persist($user);
         }
 
@@ -57,8 +60,10 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setHash(md5("Martin.Dhenu"))
             ->setEmail("martindhenu@yahoo.fr")
             ->setIsFirstConnection(0)
-            ->setImage("/build/images/profil-4.png");
+            ->setImage("/build/images/profil-4.png")
+            ->setTchatRoom($this->getReference(TchatRoomFixtures::REF_TCHATROOM . "3"));
 
+        $this->addReference(self::REF_USER . "3", $super_admin);
         $manager->persist($super_admin);
 
         $manager->flush();

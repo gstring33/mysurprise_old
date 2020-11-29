@@ -57,11 +57,12 @@ class GeizigController extends AbstractController
      */
     public function selectSomeone()
     {
-       if($this->userService->hasAlreadySelectedUser()) {
-           return $this->redirectToRoute('app_home', [], 301);
-       }
+        if($this->userService->hasAlreadySelectedUser()) {
+            return $this->redirectToRoute('app_home', [], 301);
+        }
+
         return $this->render('geizig/select_someone.html.twig', [
-            'page' => 'Jemanden auswählen',
+            'page' => 'Jemanden ziehen',
         ]);
     }
 

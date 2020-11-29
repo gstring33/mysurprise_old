@@ -32,3 +32,16 @@
   background-color: $gray-light;
   border: 1px solid $gray-dark;
 }
+
+.btn-link {
+  color: $secondary;
+}
+
+.btn-link:hover {
+  text-decoration: none;
+  color: $yellow-dark;
+}
+
+.btn-link:focus {
+  text-decoration: none;
+}

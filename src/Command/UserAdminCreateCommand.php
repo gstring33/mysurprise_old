@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\GiftsList;
+use App\Entity\TchatRoom;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -47,6 +48,9 @@ class UserAdminCreateCommand extends Command
         $list->setIsPublished(0);
         $this->em->persist($list);
 
+        $tchatroom = new TchatRoom();
+        $this->em->persist($tchatroom);
+
         $super_admin = new User();
         $firstname = 'Martin';
         $lastname = 'Dhenu';
@@ -61,7 +65,8 @@ class UserAdminCreateCommand extends Command
             ->setHash(md5($firstname . "." . $lastname))
             ->setEmail(lcfirst($firstname) . "." . lcfirst($lastname) ."@gmail.com")
             ->setIsFirstConnection(0)
-            ->setImage("/build/images/martin.png");
+            ->setImage("/build/user/images/dpg_mdh.jpeg")
+            ->setTchatRoom($tchatroom);
 
         $this->em->persist($super_admin);
 
