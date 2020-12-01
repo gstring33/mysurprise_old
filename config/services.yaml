@@ -77,3 +77,9 @@ services:
         tags:
             - { name: console.command }
 
+    app.reset_password:
+        class: App\Command\ResetPasswordCommand
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $encoder: '@security.user_password_encoder.generic'
+
