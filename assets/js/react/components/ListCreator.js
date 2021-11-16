@@ -93,6 +93,7 @@ class ListCreator extends Component {
             method: "POST",
             cache:"no-cache",
             credentials: "same-origin",
+            mode: 'no-cors',
             headers: {
                 "Content-Type": "application/json"
             },
@@ -107,7 +108,7 @@ class ListCreator extends Component {
         const response = fetch(url , {
             method: "DELETE",
             cache:"no-cache",
-            credentials: "same-origin",
+            credentials: "same-origin"
         });
 
         return response;
@@ -119,6 +120,7 @@ class ListCreator extends Component {
             method: "GET",
             cache:"no-cache",
             credentials: "same-origin",
+            mode: 'no-cors'
         });
 
         return response;
