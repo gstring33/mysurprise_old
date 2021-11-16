@@ -17,7 +17,7 @@ Encore
             throw env.error;
         }
 
-        let localHost = (Encore.isProduction()) ? "http://dpg.martin-dh.com" : "http://localhost:8080";
+        let localHost = (Encore.isProduction()) ? "http://dpg.martin-dh.com" : "http://localhost:8000";
         options['process.env'].LOCAL_HOST = JSON.stringify(localHost);
     })
     .configureFilenames({
