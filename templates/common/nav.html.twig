@@ -1,18 +1,18 @@
 <h3 class="my-0 mr-md-auto nav-title">
     <img src="/build/images/gift-primary.png" width="30" height="30" class="d-inline-block align-top mr-3" alt="" loading="lazy">
-    Das Perfekte Geschenk
+    My-surprise.com
 </h3>
 <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" href="{{ url('app_home') }}">Home</a>
-    <a class="p-2 text-dark" href="{{ url('app_manage_liste') }}">Liste bearbeiten</a>
+    <a class="p-2 text-dark" href="{{ url('app_home') }}">Accueil</a>
+    <a class="p-2 text-dark" href="{{ url('app_manage_liste') }}">Gérer ma liste</a>
     {% if app.user.isAllowedToSelectUser %}
-        <a class="p-2 text-dark" href="{{ url('app_select_someone') }}">Jemanden ziehen</a>
+        <a class="p-2 text-dark" href="{{ url('app_select_someone') }}">Tirer au sort</a>
     {% endif %}
     <a class="p-2 text-dark" href="{{ url('app_messages') }}">
         <i class="far fa-envelope"></i>{#{% if newMessages %}<span class="badge badge-danger">{{ newMessages }}</span>{% endif %}#}
     </a>
     {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <a class="p-2 text-dark" href="{{ url('app_user_admin') }}">Users</a>
+        <a class="p-2 text-dark" href="{{ url('app_user_admin') }}">Utilisateurs</a>
     {% endif %}
 </nav>
-<a class="btn btn-danger nav-logout" role="button" aria-pressed="true" href="{{ url('app_logout') }}">Logout</a>
+<a class="btn btn-danger nav-logout" role="button" aria-pressed="true" href="{{ url('app_logout') }}">Se déconnecter</a>

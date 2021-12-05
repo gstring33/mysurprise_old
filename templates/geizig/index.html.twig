@@ -6,10 +6,12 @@
     <div class="row">
         {% if not app.user.isAllowedToSelectUser and not hasAlreadySelectedUser%}
             <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-                <h1 class="display-4">Hallo {{ app.user.firstname }} ! </h1>
-                <h2>Schön, dass du da bist ... </h2>
-                <p class="lead">Bevor du jemanden ziehst, musst du zuerst deine Wunschliste erstellen</p>
-                <a href="{{ url('app_manage_liste') }}" role="button" class="btn btn-lg btn-primary">Meine Liste erstellen</a>
+                <h1 class="display-4">Salut {{ app.user.firstname }} ! </h1>
+                <h2>Bienvenue dans my-surprise.com :)</h2>
+                <p class="lead mt-5 mb-5">Avant de pouvoir tirer au sort la personne à qui tu offriras ton cadeau, commmence par créer ta propre liste</p>
+                <a href="{{ url('app_manage_liste') }}" role="button" class="btn btn-lg btn-primary">
+                    <i class="fas fa-gifts"></i> Créer ma liste
+                </a>
             </div>
         {% elseif app.user.isAllowedToSelectUser and not hasAlreadySelectedUser %}
             {% include 'partials/cards.html.twig' with {

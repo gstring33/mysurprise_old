@@ -19,9 +19,9 @@ class ListItem extends Component {
             <table className="table">
                 <thead className="thead-dark">
                 <tr>
-                    <th scope="col" className="col-width-25">Titel</th>
-                    <th scope="col" className="col-width-70">Beschreibung</th>
-                    <th scope="col" className="col-width-25">Link</th>
+                    <th scope="col" className="col-width-25">Titre</th>
+                    <th scope="col" className="col-width-70">Description</th>
+                    <th scope="col" className="col-width-25">Lien</th>
                     <th scope="col"className="col-width-10">Aktion</th>
                 </tr>
                 </thead>

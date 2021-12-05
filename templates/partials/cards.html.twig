@@ -1,5 +1,5 @@
 <div class="col-md-8 p-md-3">
-    <h5>Im Moment enthält deine Liste {{ totalGifts }} {% if totalGifts > 1 %}Wünsche{% else %}Wunsch{% endif %}</h5>
+    <h5>Ta liste contient actuelllement {{ totalGifts }} {% if totalGifts > 1 %}Souhait{% else %}souhait{% endif %}</h5>
     {% if totalGifts > 0 %}
         <ul class="list-group list-group-flush">
         {% for gift in list %}
@@ -8,7 +8,7 @@
         </ul>
     {% endif %}
     <a href="{{ url('app_manage_liste') }}" role="button" class="btn  btn-primary mt-3">
-        <i class="fa fa-cog mr-2" aria-hidden="true"></i> Meine Liste bearbeiten
+        <i class="fa fa-cog mr-2" aria-hidden="true"></i> Gérer ma liste
     </a>
 </div>
 <div class="col-md-4">
@@ -16,7 +16,7 @@
         <div class="card text-center mb-4 shadow-sm">
             <img src="/build/images/anonymous.png" class="card-img-top rounded-circle" alt="select-{{ app.user.firstname }}">
             <div class="card-body">
-                <a href="{{ url('app_select_someone') }}" class="btn btn-primary"><i class="fas fa-dice mr-2"></i> Deinen Partner ziehen</a>
+                <a href="{{ url('app_select_someone') }}" class="btn btn-primary"><i class="fas fa-dice mr-2"></i> Tirer ton partenaire au sort</a>
             </div>
         </div>
     {% else %}
@@ -25,11 +25,11 @@
             <div class="card-body">
                 <h5 class="card-title">{{ userSelected.firstname }}</h5>
                 {% if userSelected.giftsList.gifts|length == 0 %}
-                    <p class="card-text">{{ userSelected.firstname }} hat zur Zeit keine Wünsche eingetragen</p>
-                    <a href="#" class="btn btn-primary disabled">Liste von {{ userSelected.firstname }}</a>
+                    <p class="card-text">La liste de {{ userSelected.firstname }} ne contient pour le moment aucun souhait</p>
+                    <a href="#" class="btn btn-primary disabled">Liste de {{ userSelected.firstname }}</a>
                 {% else %}
-                    <p class="card-text">{{ userSelected.firstname }} wird ein Geschenk von dir erhalten.</p>
-                    <a href="{{ url('app_user_list') }}" class="btn btn-primary">Liste von {{ userSelected.firstname }} </a>
+                    <p class="card-text">Voici la personne à qui offrira ton cadeau: {{ userSelected.firstname }}.</p>
+                    <a href="{{ url('app_user_list') }}" class="btn btn-primary">Consulter la liste de {{ userSelected.firstname }} </a>
                 {% endif %}
             </div>
         </div>

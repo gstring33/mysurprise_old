@@ -1,9 +1,9 @@
-<h1>Hallo {{ app.user.firstname }}!</h1>
+<h1>Salut {{ app.user.firstname }}!</h1>
 
-<p>Um dein Passwort zurückzusetzen, click bitte auf den folgenden Link</p>
+<p>Pour changer ton mot de passe, clique sur le lien suivant: </p>
 
-<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">Dein Passwort zurücksetzen</a>
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">Renouveler mon mot de passe</a>
 
-<p>Dieser Link läuft in {{ tokenLifetime|date('g') }} Stunde(n) ab.</p>
+<p>Ce lien sera périmé dans {{ tokenLifetime|date('g') }} heure(s).</p>
 
-<p>Beste Grüße !</p>
+<p>A bientot :)</p>

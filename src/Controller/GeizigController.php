@@ -73,7 +73,7 @@ class GeizigController extends AbstractController
     public function manageList()
     {
         return $this->render('geizig/manage_list.html.twig', [
-            'page' => 'Liste bearbeiten'
+            'page' => 'Gérer ma liste'
         ]);
     }
 
@@ -91,7 +91,7 @@ class GeizigController extends AbstractController
         }
 
         return $this->render('geizig/selected_user_list.html.twig', [
-            'page' => 'Gewählte Benutzer Liste',
+            'page' => 'Liste de la personne tirée au sort',
             'list' => $selectedUser->getGiftsList()->getGifts(),
             'selectedUser' => $selectedUser
         ]);

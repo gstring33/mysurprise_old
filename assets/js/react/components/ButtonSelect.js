@@ -17,7 +17,7 @@ class ButtonSelect extends Component {
     }
 
     render() {
-        return <button onClick={this.handleOnSelect}>SELECT SOMEONE</button>
+        return <button onClick={this.handleOnSelect}>TIRE AU SORT TON PARTENAIRE</button>
     }
 }
 

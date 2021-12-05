@@ -5,7 +5,7 @@
 {% block body %}
 <div class="row">
     <div class="col-sm-12">
-        <h3 class="title-secondary"><i class="far fa-envelope"></i> Nachrichten</h3>
+        <h3 class="title-secondary"><i class="far fa-envelope"></i> Messages</h3>
     </div>
     <div class="col-sm-12 mt-5">
         <div class="accordion" id="accordeonMessage">
@@ -23,14 +23,14 @@
                             {% if tchatHostMessagesTotal > 0 %}
                                 {% for message in tchatHostMessages %}
                                     <div class="message message-{% if message.type == "host" %}left{% else %}right{% endif %}">
-                                        <h6><b>From: {% if message.type == "guest" %}{{ selectedUser.firstname }}{% else %}Du{% endif %}</b>, den {{ message.date|date("d.m.Y") }}</h6>
+                                        <h6><b>From: {% if message.type == "guest" %}{{ selectedUser.firstname }}{% else %}Toi{% endif %}</b>, le {{ message.date|date("d.m.Y") }}</h6>
                                         {{ message.content }}
                                     </div>
                                 {% endfor %}
                             {% endif %}
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary open-modal-send-message" data-message="host" data-toggle="modal" data-target="#modalMessage" data-type="host">
-                                Eine Nachricht schreiben
+                                Ecrire un message
                             </button>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
                         <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <i class="fas fa-pencil-alt"></i> Anonymous
+                            <i class="fas fa-pencil-alt"></i> Anonyme
                         </button>
                     </h2>
                 </div>
@@ -49,18 +49,17 @@
                         {% if tchatGuestMessagesTotal != 0 %}
                             {% for message in tchatGestMessages %}
                                 <div class="message message-{% if message.type == "guest" %}left{% else %}right{% endif %}">
-                                    <h6>{% if message.type == "host" %}From: Anonymous{% else %}Du{% endif %}, den {{ message.date|date("d.m.Y") }}</h6>
+                                    <h6>{% if message.type == "host" %}De: Anonyme{% else %}Du{% endif %}, den {{ message.date|date("d.m.Y") }}</h6>
                                     {{ message.content }}
                                 </div>
                             {% endfor %}
                             <button type="button" class="btn btn-primary open-modal-send-message" data-message="guest" data-toggle="modal" data-target="#modalMessage" data-type="guest">
-                                Eine Nachricht schreiben
+                                Ecrire un message
                             </button>
                         {% else %}
-                            Dein Partner hat dir im Moment noch keine Nachricht geschickt.
+                            Ton partenaire ne t'as adressé aucun message
                         {% endif %}
                     </div>
-
                 </div>
             </div>
         </div>
