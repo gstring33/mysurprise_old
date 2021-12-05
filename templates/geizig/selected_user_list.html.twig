@@ -4,16 +4,16 @@
 
 {% block body %}
     <div class="row">
-        <h3 class="title-secondary"><i class="far fa-smile"></i> Liste von {{ selectedUser.firstname }}</h3>
+        <h3 class="title-secondary"><i class="far fa-smile"></i> Liste de {{ selectedUser.firstname }}</h3>
         {% if list is empty %}
-            <p>Die Liste von {{ selectedUser.firstname }} ist im Moment Leer !!!</p>
+            <p>Aucun souhait figure dans la liste de {{ selectedUser.firstname }}</p>
         {% else %}
             <table class="table mt-5">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col" class="col-width-25">Title</th>
+                        <th scope="col" class="col-width-25">Titre</th>
                         <th scope="col" class="col-width-50">Description</th>
-                        <th scope="col" class="col-width-25">Link</th>
+                        <th scope="col" class="col-width-25">Lien</th>
                     </tr>
                     </thead>
                 <tbody>

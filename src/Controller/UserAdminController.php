@@ -81,14 +81,14 @@ class UserAdminController extends AbstractController
 
             $mailerService->send(
                 [[$user->getEmail(), $user->getFirstName() . " " . $user->getLastname()]],
-                'Dein Konto ist erstellt!',
+                'Ton compte a été crée!',
                 $this->renderView("user_admin/email_user.html.twig", [
                     'user' => $user,
                     'password' => $password
                 ])
             );
 
-            $this->addFlash('success', 'Benutzer erfolgreich erstellt!');
+            $this->addFlash('success', 'Utilisateur créé avec succès!');
 
             return $this->redirectToRoute("app_user_admin");
         }

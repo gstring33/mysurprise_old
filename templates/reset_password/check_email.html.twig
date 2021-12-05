@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}Reset pasword{% endblock %}
 
 {% block body %}
-    <p>Es wurde eine E-Mail gesendet, die einen Link enthält, auf den du klicken kannst, um dein Passwort zurückzusetzen. Dieser Link verfällt in {{ tokenLifetime|date('g') }} Stunden.</p>
-    <p>Wenn du keine E-Mail erhälst, überprüf bitte deinen Spam-Ordner oder <a href="{{ path('app_forgot_password_request') }}">erneut versuchen</a>.</p>
+    <p>Un e-mail a été envoyé à ton adresse contenant un lien pour redéfinir ton mot de passe. Ce lien sera périmé dans {{ tokenLifetime|date('g') }} heures</p>
+    <p>Dans le cas où tu n'aurais pas recu cet e-mail, consulte le dossier spam dans ta boite mail ou <a href="{{ path('app_forgot_password_request') }}"></a> renouvel ta demande</p>
 {% endblock %}
