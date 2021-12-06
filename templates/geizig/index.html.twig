@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Geizig - {{ page }}{% endblock %}
-
 {% block body %}
     <div class="row">
         {% if not app.user.isAllowedToSelectUser and not hasAlreadySelectedUser%}

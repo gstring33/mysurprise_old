@@ -62,7 +62,7 @@ class GeizigController extends AbstractController
         }
 
         return $this->render('geizig/select_someone.html.twig', [
-            'page' => 'Jemanden ziehen',
+            'page' => 'Tirer au sort',
         ]);
     }
 
