@@ -23,7 +23,7 @@
                             {% if tchatHostMessagesTotal > 0 %}
                                 {% for message in tchatHostMessages %}
                                     <div class="message message-{% if message.type == "host" %}left{% else %}right{% endif %}">
-                                        <h6><b>From: {% if message.type == "guest" %}{{ selectedUser.firstname }}{% else %}Toi{% endif %}</b>, le {{ message.date|date("d.m.Y") }}</h6>
+                                        <h6><b>{% if message.type == "guest" %}{{ selectedUser.firstname }}{% else %}Toi{% endif %}</b>, le {{ message.date|date("d.m.Y") }}</h6>
                                         {{ message.content }}
                                     </div>
                                 {% endfor %}

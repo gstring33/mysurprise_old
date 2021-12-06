@@ -39,7 +39,7 @@ class Selector extends Component {
                 <div className="card text-center mb-4 shadow-sm">
                     <img src={this.state.selection.image} className="card-img-top rounded-circle" alt={"select-" + this.state.selection.firstname}/>
                         <div className="card-body">
-                            <p className="card-text card-teaser">Du hast <span className="card-teaser-name">Tu offriras ton cadeau à : {this.state.selection.firstname} !</span></p>
+                            <p className="card-text card-teaser">Tu offriras ton cadeau à : <span className="card-teaser-name">{this.state.selection.firstname} !</span></p>
                             <a href="/" type="button" className="btn btn-secondary mb-2 ml-3"><i className="far fa-arrow-alt-circle-left fa-button"></i> Retour</a>
                         </div>
                 </div>
