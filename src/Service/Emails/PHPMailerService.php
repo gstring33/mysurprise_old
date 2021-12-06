@@ -51,7 +51,7 @@ class PHPMailerService
         $this->host = $host;
         $this->port = intval($port);
         $this->username = $username;
-        $this->password = base64_decode($password);
+        $this->password = $password;
         $this->debug_mode = $debug_mode;
         $this->logger = $logger;
     }
