@@ -32,7 +32,7 @@ class Gift
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Url(
-     *    message = "Das Link '{{value}}' ist ungültig",
+     *    message = "Le lien '{{value}}' n\'est pas correctement saisit",
      * )
      */
     private $link;
