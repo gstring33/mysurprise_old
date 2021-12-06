@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class GiftController extends AbstractController
 {
-    const SUCCESS_POST_MESSAGE = "Ihre Geschenksidee wurde erfolgreich gespeichert";
-    const SUCCESS_DELETE_MESSAGE = "Ihre Geschenksidee wurde erfolgreich entfernt";
-    const FAILED_MESSAGE = "Ihre Geschenkensidee kann nicht gespeichert werden";
+    const SUCCESS_POST_MESSAGE = "Ton souhait a été corectement enregistré";
+    const SUCCESS_DELETE_MESSAGE = "Ton souhait a été correctement supprimé";
+    const FAILED_MESSAGE = "Ton souhait ne peut pas être enregistré.";
     const SUCCESS_STATUS = "success";
     const FAILED_STATUS = "failed";
 

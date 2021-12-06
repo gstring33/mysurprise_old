@@ -15,9 +15,9 @@ class MessageController extends AbstractController
 {
     const SUCCESS_STATUS = "success";
     const ERROR_STATUS = "error";
-    const SUCCESS_POST_MESSAGE_ANONYMOUS  = "Deine Nachricht wurde anonym erfolreich an %s gesendet";
-    const SUCCESS_POST_MESSAGE = "Deine Nachricht wurde erfolreich an deinen Partner gesendet";
-    const ERROR_POST_MESSAGE  = "Deine Nachricht konnte nicht gesendet werden";
+    const SUCCESS_POST_MESSAGE_ANONYMOUS  = "Ton message a été envoyé à %s";
+    const SUCCESS_POST_MESSAGE = "Ton message a été envoyé à ton partenaire";
+    const ERROR_POST_MESSAGE  = "Ton message n'a pas pu être envoyé";
     const MESSAGE_TYPE_HOST = "host";
     const MESSAGE_TYPE_GUEST = "guest";
 
@@ -66,10 +66,10 @@ class MessageController extends AbstractController
         }
 
         // Send Email
-        $sentFrom = $type === MessageController::MESSAGE_TYPE_HOST ? "deinem anonymen Partner" : $sentTo->getFirstname();
+        $sentFrom = $type === MessageController::MESSAGE_TYPE_HOST ? "ton partenaire (Anonyme)" : $sentTo->getFirstname();
         $mailerService->send(
             [[$sentTo->getEmail(), $sentTo->getFirstName() . " " . $sentTo->getLastname()]],
-            'Neue Nachricht von ' . $sentFrom,
+            'Nouveau message de  ' . $sentFrom,
             $this->renderView("message/message_email.html.twig", [
                 'sentTo' => $sentTo,
                 'sentFrom' => $sentFrom
