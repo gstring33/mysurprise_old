@@ -65,7 +65,7 @@ class PHPMailerService
     public function send(array $addresses, string $subject, string $body)
     {
         $this->initServer($this->host, $this->username, $this->password, $this->port)
-            ->initRecipient($this->from, 'Das Perfekte Geschenk', $addresses)
+            ->initRecipient($this->from, 'Noel Thorigne 2021', $addresses)
             ->initContent($subject, $body);
 
         try {
@@ -161,7 +161,7 @@ class PHPMailerService
     {
         try {
             $this->mailer->isHTML(true);
-            $this->mailer->Subject = "Das Perfekte Geschenk - " . $subject;
+            $this->mailer->Subject = "my-surprise.com - " . $subject;
             $this->mailer->Body    = $html;
             //$this->mailer->AltBody = 'This is the body in plain text for non-HTML mail clients';
         }catch (Exception $e) {

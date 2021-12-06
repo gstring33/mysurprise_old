@@ -71,7 +71,7 @@ class UserAdminController extends AbstractController
                 ->setLastname($lastname)
                 ->setUsername(lcfirst($firstname) . "." . lcfirst($lastname))
                 ->setPassword($encoder->encodePassword($user, $password))
-                ->setImage('/build/images/user/' . $form->get('image')->getData())
+                ->setImage('/build/images/users/' . $form->get('image')->getData())
                 ->setHash(md5($firstname . "." . $lastname))
                 ->setEmail($form->get('email')->getData())
                 ->setGiftsList($giftList)
