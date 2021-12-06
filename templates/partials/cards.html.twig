@@ -21,14 +21,18 @@
         </div>
     {% else %}
         <div class="card text-center mb-4 shadow-sm">
-            <img src="{{ userSelected.image }}" class="card-img-top rounded-circle"  alt="profil-{{ userSelected.firstname }}">
+            <div style="background: url('{{ userSelected.image }}');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    height: 400px;"></div>
             <div class="card-body">
                 <h5 class="card-title">{{ userSelected.firstname }}</h5>
                 {% if userSelected.giftsList.gifts|length == 0 %}
                     <p class="card-text">La liste de {{ userSelected.firstname }} ne contient pour le moment aucun souhait</p>
                     <a href="#" class="btn btn-primary disabled">Liste de {{ userSelected.firstname }}</a>
                 {% else %}
-                    <p class="card-text">Voici la personne à qui offrira ton cadeau: {{ userSelected.firstname }}.</p>
+                    <p class="card-text">{{ userSelected.firstname }} est la personne à qui offrira ton cadeau</p>
                     <a href="{{ url('app_user_list') }}" class="btn btn-primary">Consulter la liste de {{ userSelected.firstname }} </a>
                 {% endif %}
             </div>
