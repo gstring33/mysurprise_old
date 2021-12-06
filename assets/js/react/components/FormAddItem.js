@@ -76,7 +76,7 @@ class FormAddItem extends Component {
                 </textarea>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="link">Link</label>
+                    <label htmlFor="link">Lien</label>
                     <input
                         type="text"
                         placeholder="ex: https://amazon.fr"
